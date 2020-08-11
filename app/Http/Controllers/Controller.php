@@ -76,7 +76,7 @@ class Controller extends BaseController
         $param = array(
             self::RETURN_CODE   => $code,
             self::RETURN_MSG    => $msg,
-            self::RETURN_STATUS => true,
+            self::RETURN_STATUS => false,
             self::RETURN_DATA   => $data
         );
 
@@ -103,7 +103,7 @@ class Controller extends BaseController
         $param = array(
             self::RETURN_CODE   => $code,
             self::RETURN_MSG    => $msg,
-            self::RETURN_STATUS => false,
+            self::RETURN_STATUS => true,
             self::RETURN_DATA   => $data
         );
 
