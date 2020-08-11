@@ -85,7 +85,7 @@ class CommonServices
      * @mail copoet@126.com
      * Date: 2020/8/11/5:02 PM
      */
-    public function arrayFormat($array)
+    public static function arrayFormat($array)
     {
         $newArr = array();
         if (!is_array($array)) {
@@ -95,7 +95,7 @@ class CommonServices
             if (!is_array($val)) {
                 $newArr[$key] = ucwords(str_replace('_', ' ', $val));
             } else {
-                $array[$key] = $this->arrayFormat($val);
+                $array[$key] = self::arrayFormat($val);
                 $newArr[]    = $val;
             }
         }
