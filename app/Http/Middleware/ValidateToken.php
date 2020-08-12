@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Model\ManagerModel;
 use Closure;
 
-class CheckToken
+class ValidateToken
 {
     /**
      * Handle an incoming request.
