@@ -53,4 +53,54 @@ class CommonServices
         return sha1(str_replace('-', '', Uuid::generate()));
     }
 
+
+    /**
+     * 树形结构获取
+     * @param $data
+     * @param $pid
+     * @return array|string
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/11/5:04 PM
+     */
+    public static function getTree($data, $pid)
+    {
+        $tree = '';
+        foreach ($data as $k => $v) {
+            if ($v['parent_id'] == $pid) {
+                $v['children'] = self::getTree($data, $v['id']);
+                $tree[]        = $v;
+            }
+        }
+
+        return $tree;
+    }
+
+
+    /**
+     * 返回数据格式化
+     * @param $array
+     * @return array
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/11/5:02 PM
+     */
+    public static function arrayFormat($array)
+    {
+        $newArr = array();
+        if (!is_array($array)) {
+            return $array;
+        }
+        foreach ($array as $key => $val) {
+            if (!is_array($val)) {
+                $newArr[$key] = ucwords(str_replace('_', ' ', $val));
+            } else {
+                $array[$key] = self::arrayFormat($val);
+                $newArr[]    = $val;
+            }
+        }
+
+        return $newArr;
+
+    }
 }
