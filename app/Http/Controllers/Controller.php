@@ -7,7 +7,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Services\Common\CodeService;
-use Illuminate\Http\Response;
 
 class Controller extends BaseController
 {
