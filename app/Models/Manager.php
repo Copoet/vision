@@ -8,7 +8,7 @@ class Manager extends Model
 {
     //
 
-    protected $table = 'manage';
+    protected $table = 'manager';
 
 
     protected $primaryKey = 'id';

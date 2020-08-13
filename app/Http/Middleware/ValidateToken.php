@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Services\Common\CodeService;
+use App\Services\ManagerService;
 
 class ValidateToken
 {
@@ -13,28 +15,17 @@ class ValidateToken
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,ManagerService $mananger)
     {
         $token = $request->input('token');
         if (empty($token)) {
-            $result['code'] = '4001';
-            $result['status'] = false;
-            $result['msg'] = '操作参数不能为空';
-            return Response()->json($result);
+            return Response()->json(CodeService::PUBLIC_PARAMS_NULL);
         }
-        $checkResult = ManagerModel::checkManagerToken($token);
+        $checkResult = $mananger->checkManagerToken($token);
+
         if (empty($checkResult)) {
-            $result['code'] = '4001';
-            $result['status'] = false;
-            $result['msg'] = 'token不合法';
-            return Response()->json($result);
+            return Response()->json(CodeService::PUBLIC_TOKEN_ERROR);
         }
-//        if ((time() - 86400) > $checkResult->last_time) {
-//            $result['code'] = '4001';
-//            $result['status'] = false;
-//            $result['msg'] = '会话过期,请重新登录';
-//            return Response()->json($result);
-//        }
         return $next($request);
     }
 

@@ -6,9 +6,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use App\Services\Common\CodeServices;
+use App\Services\Common\CodeService;
 use Illuminate\Http\Response;
-
 
 class Controller extends BaseController
 {
@@ -36,7 +35,7 @@ class Controller extends BaseController
     public function getCodeMsg($code = false, $msg = false, $defaultType = false)
     {
 
-        $msgConfig = CodeServices::$config;
+        $msgConfig = CodeService::$config;
 
         if (empty($msg)) {
             if (!empty($msgConfig[$code])) {
@@ -46,11 +45,11 @@ class Controller extends BaseController
 
                 if ($defaultType == false) {
 
-                    $msg = $msgConfig[CodeServices::PUBLIC_ERROR];
+                    $msg = $msgConfig[CodeService::PUBLIC_ERROR];
 
                 } else {
 
-                    $msg = $msgConfig[CodeServices::PUBLIC_SUCCESS];
+                    $msg = $msgConfig[CodeService::PUBLIC_SUCCESS];
                 }
             }
         }
@@ -80,7 +79,7 @@ class Controller extends BaseController
             self::RETURN_DATA   => $data
         );
 
-        return response()->json($param);
+        exit(json_encode($param));
     }
 
 
@@ -96,18 +95,15 @@ class Controller extends BaseController
      */
     public function returnSuccess($data = array(), $code = 2000, $msg = NULL)
     {
-
         $msg  = $this->getCodeMsg((int)$code, $msg);
         $data = empty($data) ? $data : $data;
-
         $param = array(
             self::RETURN_CODE   => $code,
             self::RETURN_MSG    => $msg,
             self::RETURN_STATUS => true,
             self::RETURN_DATA   => $data
         );
-
-        return response()->json($param);
+        exit(json_encode($param));
     }
 
 

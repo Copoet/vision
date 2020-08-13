@@ -10,7 +10,7 @@ namespace App\Services\Common;
 
 use Webpatser\Uuid\Uuid;
 
-class CommonServices
+class CommonService
 {
 
     /**

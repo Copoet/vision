@@ -9,7 +9,7 @@
 namespace App\Services\Common;
 
 
-class CodeServices
+class CodeService
 {
 
     //参数类
