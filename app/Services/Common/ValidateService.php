@@ -9,7 +9,7 @@
 namespace App\Services\Common;
 
 
-class ValidateServices
+class ValidateService
 {
 
     /**
