@@ -45,11 +45,12 @@ class SystemService
      * @mail copoet@126.com
      * Date: 2020/8/18/11:38 PM
      */
-    public function getSystemList($where,$page,$pageSize){
+    public function getSystemList($where, $page, $pageSize)
+    {
 
         $result['total'] = System::query()->where(function ($query) use ($where) {
             if (isset($param['keyWords'])) {
-                $query->where('sys_name', 'like' ,'%' . $where['keyWords'] . '%');
+                $query->where('sys_name', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
 
@@ -58,7 +59,7 @@ class SystemService
         $result['list'] = System::query()
             ->where(function ($query) use ($where) {
                 if (isset($where['keyWords'])) {
-                    $query->where('sys_name','like' ,'%' . $where['keyWords'] . '%');
+                    $query->where('sys_name', 'like', '%' . $where['keyWords'] . '%');
                 }
             })
             ->offset($offset)
@@ -69,5 +70,50 @@ class SystemService
         return $result;
 
 
+    }
+
+
+    /**
+     * 新增系统参数
+     * @param $param
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/18/11:46 PM
+     */
+    public function store($param)
+    {
+
+        return System::query()->create($param);
+    }
+
+
+    /**
+     * 修改系统参数
+     * @param $where
+     * @param $param
+     * @return int
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/18/11:47 PM
+     */
+    public function update($where, $param)
+    {
+        return System::query()->where($where)->update($param);
+    }
+
+
+    /**
+     * 删除系统参数
+     * @param $where
+     * @return int
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/18/11:48 PM
+     */
+    public function delSystem($where)
+    {
+
+        return System::query()->where($where)->update(['status' => 1]);
     }
 }
