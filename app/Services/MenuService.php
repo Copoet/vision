@@ -54,7 +54,7 @@ class MenuService
 
         $offset = ($page - 1) * $pageSize;
 
-        $result = Menu::query()->where($where)
+        $result['list'] = Menu::query()->where($where)
             ->offset($offset)
             ->limit($pageSize)
             ->get(['id,status,path,parent_id,icon,name,url,add_time,is_delete'])
