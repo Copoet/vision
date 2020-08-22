@@ -21,8 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //login
 Route::group(['namespace' => 'Admin'], function () {
-
-
     Route::post('login', 'LoginController@login');
 
 });
