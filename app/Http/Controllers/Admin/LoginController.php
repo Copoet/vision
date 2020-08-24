@@ -38,11 +38,12 @@ class LoginController extends Controller
 
         if ($pass == $managerInfo['password']) {
 
-            $token           = Commonservice::generateToken();
-            $update['up_ip'] = $request->getClientIp();
-            $update['token'] = $token;
-            $update['last_time'] = date('Y-m-d H:i:s',time());
-            $loginResult     = $manager->save($update,['uuid'=>$managerInfo['uuid']]);
+            $token = Commonservice::generateToken();
+
+            $update['up_ip']     = $request->getClientIp();
+            $update['token']     = $token;
+            $update['last_time'] = date('Y-m-d H:i:s', time());
+            $loginResult         = $manager->save($update, ['uuid' => $managerInfo['uuid']]);
             if ($loginResult) {
                 $data['token'] = $token;
 
