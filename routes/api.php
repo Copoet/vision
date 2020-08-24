@@ -26,12 +26,10 @@ Route::group(['namespace' => 'Admin'], function () {
 });
 
 
-//common
-Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function () {
-    Route::get('login', 'LoginController@login');
+//common  'middleware' => 'ValidateToken'
+Route::group(['namespace' => 'Admin'], function () {
 
-
-    Route::get('manager/list', 'ManagerController@login');
+    Route::post('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@login');
     Route::put('manager/update', 'ManagerController@login');
     Route::delete('manager/delete', 'ManagerController@login');
