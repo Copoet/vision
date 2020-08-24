@@ -29,7 +29,7 @@ Route::group(['namespace' => 'Admin'], function () {
 //common  'middleware' => 'ValidateToken'
 Route::group(['namespace' => 'Admin'], function () {
 
-    Route::post('manager/list', 'ManagerController@managerList');
+    Route::get('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@login');
     Route::put('manager/update', 'ManagerController@login');
     Route::delete('manager/delete', 'ManagerController@login');
