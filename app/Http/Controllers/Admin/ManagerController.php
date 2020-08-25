@@ -11,11 +11,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Common\CodeService;
+use App\Services\Common\CommonService;
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
 {
+
+
+    protected $managerService;
+
+    public function __construct(ManagerService $service)
+    {
+
+        $this->managerService = $service;
+    }
 
 
     /**
@@ -26,7 +36,7 @@ class ManagerController extends Controller
      * @mail copoet@126.com
      * Date: 2020/8/24/5:11 PM
      */
-    public function managerList(Request $request, ManagerService $managerService)
+    public function managerList(Request $request)
     {
 
         $page     = $request->input('page') ? $request->input('page') : 1;
@@ -34,7 +44,7 @@ class ManagerController extends Controller
 
         $param = $request->all();
 
-        $list = $managerService->getManagerList($param, $page, $pageSize);
+        $list = $this->managerService->getManagerList($param, $page, $pageSize);
 
         if ($list) {
 
@@ -47,4 +57,51 @@ class ManagerController extends Controller
 
 
     }
+
+
+    /**
+     * 添加管理员
+     * @param Request $request
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/25/2:54 PM
+     */
+    public function createManager(Request $request)
+    {
+
+        $userName = $request->input('name');
+        $passWord = $request->input('pass_word');
+        $status   = $request->input('status');
+
+        if (empty($userName) || empty($passWord) || empty($status)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $checkResult = $this->managerService->getManagerInfo($userName);
+
+        if ($checkResult) {
+
+            $this->returnFail(CodeService::PUBLIC_USERNAME_ALREADY_EXIST);
+        }
+
+        $data['name']     = $userName;
+        $data['password'] = CommonService::generatePass($userName, $passWord);
+        $data['uuid']     = CommonService::getUuid();
+        $data['status']   = $status;
+        $data['up_ip']    = $request->getClientIp();
+
+        $result = $this->managerService->store($data);
+
+        if ($result) {
+            $this->returnSuccess($result, CodeService::PUBLIC_SUCCESS);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+    }
+
+
+
+
 }

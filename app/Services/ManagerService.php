@@ -105,4 +105,19 @@ class ManagerService
         return $result;
 
     }
+
+
+    /**
+     * 添加管理员
+     * @param $param
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/25/3:00 PM
+     */
+    public function store($param)
+    {
+
+        return Manager::query()->create($param);
+    }
 }
