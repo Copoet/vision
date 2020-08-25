@@ -65,9 +65,10 @@ class CommonService
      */
     public static function getTree($data, $pid)
     {
-        $tree = '';
+        $tree = [];
         foreach ($data as $k => $v) {
             if ($v['parent_id'] == $pid) {
+
                 $v['children'] = self::getTree($data, $v['id']);
                 $tree[]        = $v;
             }
