@@ -28,13 +28,11 @@ Route::group(['namespace' => 'Admin'], function () {
 
 //common
 Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function () {
-    Route::get('login', 'LoginController@login');
 
-
-    Route::get('manager/list', 'ManagerController@login');
-    Route::post('manager/create', 'ManagerController@login');
-    Route::put('manager/update', 'ManagerController@login');
-    Route::delete('manager/delete', 'ManagerController@login');
+    Route::get('manager/list', 'ManagerController@managerList');
+    Route::post('manager/create', 'ManagerController@createManager');
+    Route::put('manager/update', 'ManagerController@updateManager');
+    Route::delete('manager/delete', 'ManagerController@delManager');
 
     Route::get('menu/list', 'MenuController@login');
     Route::post('menu/create', 'MenuController@login');
