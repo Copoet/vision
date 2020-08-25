@@ -102,6 +102,77 @@ class ManagerController extends Controller
     }
 
 
+    /**
+     * 更新管理员信息
+     * @param Request $request
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/25/4:00 PM
+     */
+    public function updateManager(Request $request)
+    {
+
+        $userName = $request->input('name');
+        $passWord = $request->input('pass_word');
+        $status   = $request->input('status');
+        $uuid     = $request->input('uuid');
+
+        if (empty($userName) || empty($passWord) || empty($status) || empty($uuid)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $managerInfo = $this->managerService->getManagerInfo($userName);
+
+        if ($managerInfo && $uuid !== $managerInfo['uuid']) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
+        }
+
+        $date['name']     = $userName;
+        $date['password'] = CommonService::generatePass($userName, $passWord);
+        $date['status']   = $status;
+
+        $result = $this->managerService->save($date, ['uuid' => $uuid]);
+
+        if ($result) {
+
+            $this->returnSuccess($result, CodeService::PUBLIC_SUCCESS);
+
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+    }
+
+
+    /**
+     * 删除管理员
+     * @param Request $request
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/25/4:05 PM
+     */
+    public function delManager(Request $request)
+    {
+
+        $uuid = $request->input('uuid');
+
+        if (empty($uuid)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $result = $this->managerService->delManager(['uuid' => $uuid]);
+
+        if ($result) {
+
+            $this->returnSuccess($result, CodeService::PUBLIC_SUCCESS);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
 
 
 }
