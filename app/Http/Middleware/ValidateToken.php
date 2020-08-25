@@ -15,17 +15,20 @@ class ValidateToken
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next,ManagerService $mananger)
+    public function handle($request, Closure $next)
     {
         $token = $request->input('token');
         if (empty($token)) {
             return Response()->json(CodeService::PUBLIC_PARAMS_NULL);
         }
-        $checkResult = $mananger->checkManagerToken($token);
+
+        $manager     = new ManagerService();
+        $checkResult = $manager->checkManagerToken($token);
 
         if (empty($checkResult)) {
             return Response()->json(CodeService::PUBLIC_TOKEN_ERROR);
         }
+
         return $next($request);
     }
 

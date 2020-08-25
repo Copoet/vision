@@ -26,8 +26,8 @@ Route::group(['namespace' => 'Admin'], function () {
 });
 
 
-//common  'middleware' => 'ValidateToken'
-Route::group(['namespace' => 'Admin'], function () {
+//common
+Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function () {
 
     Route::get('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@login');
