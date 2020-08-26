@@ -34,10 +34,17 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('manager/update', 'ManagerController@updateManager');
     Route::delete('manager/delete', 'ManagerController@delManager');
 
-    Route::get('menu/list', 'MenuController@login');
-    Route::post('menu/create', 'MenuController@login');
-    Route::put('menu/update', 'MenuController@login');
-    Route::delete('menu/delete', 'MenuController@login');
+    Route::get('menu/list', 'MenuController@menuList');
+    Route::get('menu/tree', 'MenuController@menuTree');
+    Route::post('menu/create', 'MenuController@createMenu');
+    Route::put('menu/update', 'MenuController@updateMenu');
+    Route::delete('menu/delete', 'MenuController@delMenu');
+
+
+    Route::get('system/list', 'SystemController@systemList');
+    Route::post('system/create', 'SystemController@createSystem');
+    Route::put('system/update', 'SystemController@updateSystem');
+    Route::delete('system/delete', 'SystemController@delSystem');
 
     Route::get('nav/list', 'NavigationController@login');
     Route::post('nav/create', 'NavigationController@login');
@@ -49,14 +56,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('slide/update', 'SlideShowController@login');
     Route::delete('slide/delete', 'SlideShowController@login');
 
-    Route::get('system/list', 'SystemController@login');
-    Route::post('system/create', 'SystemController@login');
-    Route::put('system/update', 'SystemController@login');
-    Route::delete('system/delete', 'SystemController@login');
 
-    Route::get('user/list', 'UsersController@login');
-    Route::post('user/create', 'UsersController@login');
-    Route::put('user/update', 'UsersController@login');
-    Route::delete('user/delete', 'UsersController@login');
+    Route::get('user/list', 'UserController@userList');
+    Route::post('user/create', 'UserController@createUser');
+    Route::put('user/update', 'UserController@updateUser');
+    Route::delete('user/delete', 'UserController@delUser');
 
 });

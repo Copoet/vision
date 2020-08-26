@@ -11,7 +11,7 @@ namespace App\Services;
 
 use App\Models\Users;
 
-class UsersService
+class UserService
 {
 
 

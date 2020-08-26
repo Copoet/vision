@@ -43,7 +43,7 @@ class MenuService
      * @mail copoet@126.com
      * Date: 2020/8/24/5:18 PM
      */
-    public function getMenuList($where, $columns = ['*'],$page, $pageSize)
+    public function getMenuList($where, $columns = ['*'], $page, $pageSize)
     {
 
         $result['total'] = Menu::query()
@@ -59,7 +59,7 @@ class MenuService
             if (isset($param['keyWords'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
-            })
+        })
             ->offset($offset)
             ->limit($pageSize)
             ->get($columns)
@@ -115,5 +115,35 @@ class MenuService
             ->toArray();
 
         return $result;
+    }
+
+
+    /**
+     * 获取所有菜单
+     * @return array
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/25/7:20 PM
+     */
+    public function getAllMenu()
+    {
+
+        return Menu::query()->where('status', '1')->get(['id', 'name as label', 'parent_id'])->toArray();
+
+    }
+
+
+    /**
+     * 获取菜单信息
+     * @param $where
+     * @param array $columns
+     * @return array
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/26/10:05 AM
+     */
+    public function getMenuInfo($where, $columns = ['*'])
+    {
+        return Menu::query()->where($where)->get($columns)->toArray();
     }
 }
