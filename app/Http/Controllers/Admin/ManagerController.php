@@ -31,7 +31,6 @@ class ManagerController extends Controller
     /**
      * 管理员列表
      * @param Request $request
-     * @param ManagerService $managerService
      * @author copoet
      * @mail copoet@126.com
      * Date: 2020/8/24/5:11 PM
