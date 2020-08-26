@@ -131,4 +131,19 @@ class MenuService
         return Menu::query()->where('status', '1')->get(['id', 'name as label', 'parent_id'])->toArray();
 
     }
+
+
+    /**
+     * 获取菜单信息
+     * @param $where
+     * @param array $columns
+     * @return array
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/8/26/10:05 AM
+     */
+    public function getMenuInfo($where, $columns = ['*'])
+    {
+        return Menu::query()->where($where)->get($columns)->toArray();
+    }
 }
