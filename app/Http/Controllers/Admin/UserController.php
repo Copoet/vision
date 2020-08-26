@@ -8,9 +8,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controller;
 
-class UsersController extends Controller
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
 {
 
 }

@@ -40,6 +40,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('menu/update', 'MenuController@updateMenu');
     Route::delete('menu/delete', 'MenuController@delMenu');
 
+
+    Route::get('system/list', 'SystemController@systemList');
+    Route::post('system/create', 'SystemController@createSystem');
+    Route::put('system/update', 'SystemController@updateSystem');
+    Route::delete('system/delete', 'SystemController@delSystem');
+
     Route::get('nav/list', 'NavigationController@login');
     Route::post('nav/create', 'NavigationController@login');
     Route::put('nav/update', 'NavigationController@login');
@@ -50,14 +56,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('slide/update', 'SlideShowController@login');
     Route::delete('slide/delete', 'SlideShowController@login');
 
-    Route::get('system/list', 'SystemController@login');
-    Route::post('system/create', 'SystemController@login');
-    Route::put('system/update', 'SystemController@login');
-    Route::delete('system/delete', 'SystemController@login');
 
-    Route::get('user/list', 'UsersController@login');
-    Route::post('user/create', 'UsersController@login');
-    Route::put('user/update', 'UsersController@login');
-    Route::delete('user/delete', 'UsersController@login');
+    Route::get('user/list', 'UserController@login');
+    Route::post('user/create', 'UserController@login');
+    Route::put('user/update', 'UserController@login');
+    Route::delete('user/delete', 'UserController@login');
 
 });
