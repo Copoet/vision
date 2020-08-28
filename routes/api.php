@@ -62,4 +62,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('user/update', 'UserController@updateUser');
     Route::delete('user/delete', 'UserController@delUser');
 
+
+    Route::get('stock/list', 'StockController@userList');
+    Route::post('stock/create', 'StockController@createUser');
+    Route::put('stock/update', 'StockController@updateUser');
+    Route::delete('stock/delete', 'StockController@delUser');
+
 });
