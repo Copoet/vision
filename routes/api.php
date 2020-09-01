@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 
 //login
 Route::group(['namespace' => 'Admin'], function () {
-    Route::get('login', 'LoginController@login');
+    Route::any('login', 'LoginController@login');
 
 });
 
