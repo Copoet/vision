@@ -195,4 +195,26 @@ class MenuController extends Controller
 
     }
 
+
+    /**
+     * 获取侧边栏菜单
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/9/2/10:19 AM
+     */
+    public function sideMenu(){
+
+        $list = $this->menuService->getSideMenu();
+
+        $result = CommonService::getTree($list, 0);
+
+        if($result){
+
+            $this->returnSuccess($result);
+        }else{
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+    }
+
 }
