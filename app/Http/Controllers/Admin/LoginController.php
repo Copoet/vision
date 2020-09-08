@@ -12,7 +12,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Common\CodeService;
 use App\Services\Common\Commonservice;
-use App\Services\ManagerService;
 
 class LoginController extends Controller
 {
