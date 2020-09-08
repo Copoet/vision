@@ -24,8 +24,11 @@ class LoginController extends Controller
      * @mail copoet@126.com
      * Date: 2020/8/11/6:52 PM
      */
-    public function login(Request $request, ManagerService $manager)
+    public function login(Request $request)
     {
+
+        $manager = resolve('App\Services\ManagerService');
+
         $name     = $request->input('name');
         $password = $request->input('password');
         if (empty($name) || empty($password)) {
