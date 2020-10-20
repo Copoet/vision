@@ -51,4 +51,47 @@ class StockService
         return $result;
 
     }
+
+
+    /**
+     * 保存记录
+     * @param $param
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/9/2/4:06 PM
+     */
+    public function store($param)
+    {
+        return Stock::query()->create($param);
+    }
+
+
+    /**
+     * 更新记录
+     * @param $where
+     * @param $param
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/9/2/4:07 PM
+     */
+    public function update($where, $param)
+    {
+        return Stock::query()->where($where)->update($param);
+    }
+
+
+    /**
+     * 删除记录
+     * @param $where
+     * @param $param
+     * @return int
+     * @author copoet
+     * @mail copoet@126.com
+     * Date: 2020/9/2/4:09 PM
+     */
+    public function delete($where)
+    {
+        return Stock::query()->where($where)->update(['status'=>1]);
+    }
 }

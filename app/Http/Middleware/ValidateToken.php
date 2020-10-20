@@ -19,14 +19,21 @@ class ValidateToken
     {
         $token = $request->input('token');
         if (empty($token)) {
-            return Response()->json(CodeService::PUBLIC_PARAMS_NULL);
+            return Response()->json(['code'   => CodeService::PUBLIC_PARAMS_NULL,
+                'msg'    => '参数为空',
+                'status' => false,
+                'data'   => '']);
         }
 
         $manager     = new ManagerService();
         $checkResult = $manager->checkManagerToken($token);
-
         if (empty($checkResult)) {
-            return Response()->json(CodeService::PUBLIC_TOKEN_ERROR);
+            return Response()->json([
+                'code'   => CodeService::PUBLIC_TOKEN_ERROR,
+                'msg'    => '请重新登录',
+                'status' => false,
+                'data'   => ''
+            ]);
         }
 
         return $next($request);
