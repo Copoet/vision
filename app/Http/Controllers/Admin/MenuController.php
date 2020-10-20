@@ -42,7 +42,7 @@ class MenuController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->menuService->getMenuList($param, $page, $pageSize);
+        $list = $this->menuService->getMenuList($param, '*',$page, $pageSize);
 
         if ($list) {
 
