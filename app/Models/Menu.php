@@ -44,9 +44,5 @@ class Menu extends Model
     }
 
 
-    public function getParentIdAttribute($value){
 
-        $parentTitle = self::query()->where(['id'=>$value])->value('name');
-        return $parentTitle ?? '顶级菜单';
-    }
 }
