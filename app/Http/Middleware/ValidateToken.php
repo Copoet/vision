@@ -19,7 +19,10 @@ class ValidateToken
     {
         $token = $request->input('token');
         if (empty($token)) {
-            return Response()->json(CodeService::PUBLIC_PARAMS_NULL);
+            return Response()->json(['code'   => CodeService::PUBLIC_PARAMS_NULL,
+                'msg'    => '参数为空',
+                'status' => false,
+                'data'   => '']);
         }
 
         $manager     = new ManagerService();
