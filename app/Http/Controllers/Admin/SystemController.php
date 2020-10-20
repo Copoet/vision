@@ -70,7 +70,7 @@ class SystemController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $checkResult = $this->systemService->getSystem(['name' => $sysName]);
+        $checkResult = $this->systemService->getSystem(['sys_name' => $sysName]);
 
         if ($checkResult) {
 

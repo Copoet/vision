@@ -9,9 +9,9 @@
 namespace App\Enum;
 
 
-class System
+class ManagerEnum
 {
-    const STATUS = [
+   const STATUS = [
         1 => '启用',
         2 => '禁用'
     ];
@@ -20,4 +20,5 @@ class System
         1 => '是',
         2 => '否'
     ];
+
 }

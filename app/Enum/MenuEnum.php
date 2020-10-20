@@ -9,7 +9,7 @@
 namespace App\Enum;
 
 
-class Menu
+class MenuEnum
 {
     const STATUS = [
         1 => '启用',
