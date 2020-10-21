@@ -65,6 +65,13 @@ class MenuService
             ->get($columns)
             ->toArray();
 
+        $menu = array_column($result['list'], 'name', 'id');
+
+        foreach ($result['list'] as $key => $val) {
+            $result['list'][$key]['parent_title'] = $menu[$val['parent_id']] ?? '顶级菜单';
+
+        }
+
         return $result;
     }
 
@@ -109,7 +116,7 @@ class MenuService
      */
     public function getSideMenu()
     {
-        $result = Menu::query()->where(['status'=>1])
+        $result = Menu::query()->where(['status' => 1])
             ->orderBy('id', 'asc')
             ->get(['id', 'name as title', 'parent_id', 'url', 'icon'])
             ->toArray();

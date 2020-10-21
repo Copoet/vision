@@ -10,8 +10,157 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Services\Common\CodeService;
+use App\Services\SlideShowService;
+use Illuminate\Http\Request;
 
 class SlideShowController extends Controller
 {
+
+    protected $slideService;
+
+
+    public function __construct(SlideShowService $service)
+    {
+        $this->slideService = $service;
+    }
+
+
+    /**
+     *轮播列表
+     * @param Request $request
+     *
+     */
+    public function slideList(Request $request)
+    {
+        $page     = $request->input('page') ? $request->input('page') : 1;
+        $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
+        $param    = $request->all();
+
+        $list = $this->slideService->getSlideList($param, '*', $page, $pageSize);
+
+        if ($list) {
+            $this->returnSuccess($list, CodeService::PUBLIC_SUCCESS);
+
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
+
+
+    /**
+     * 创建轮播
+     * @param Request $request
+     */
+    public function createSlide(Request $request)
+    {
+
+        $name    = $request->input('name');
+        $sortId  = $request->input('sort_id');
+        $url     = $request->input('url');
+        $status  = $request->input('status');
+        $pic     = $request->input('pic');
+        $remark  = $request->input('remark');
+        $myorder = $request->input('myorder');
+
+        if (empty($name) || empty($url) || empty($status)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $checkResult = $this->slideService->getSlideShow(['name' => $name], 'id');
+
+        if ($checkResult) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
+        }
+
+        $data['name']    = $name;
+        $data['sort_id'] = $sortId;
+        $data['url']     = $url;
+        $data['status']  = $status;
+        $data['pic']     = $pic;
+        $data['remark']  = $remark;
+        $data['myorder'] = $myorder;
+
+        $result = $this->slideService->store($data);
+
+        if ($result) {
+
+            $this->returnSuccess($result);
+        }
+
+        $this->returnFail(CodeService::PUBLIC_ERROR);
+
+    }
+
+
+    /**
+     * 轮播修改
+     * @param Request $request
+     */
+    public function updateSlide(Request $request)
+    {
+        $name    = $request->input('name');
+        $sortId  = $request->input('sort_id');
+        $url     = $request->input('url');
+        $status  = $request->input('status');
+        $pic     = $request->input('pic');
+        $remark  = $request->input('remark');
+        $myorder = $request->input('myorder');
+        $id       = $request->input('id');
+
+        if (empty($name) || empty($url) || empty($status)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $checkResult = $this->slideService->getSlideShow(['name' => $name], 'id');
+
+        if ($checkResult && $id !== $checkResult['id']) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
+        }
+
+        $data['name']    = $name;
+        $data['sort_id'] = $sortId;
+        $data['url']     = $url;
+        $data['status']  = $status;
+        $data['pic']     = $pic;
+        $data['remark']  = $remark;
+        $data['myorder'] = $myorder;
+
+
+        $result = $this->slideService->update(['id' => $id], $data);
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+    }
+
+
+    /**
+     * 轮播删除
+     * @param Request $request
+     */
+    public function delSlide(Request $request)
+    {
+
+        $id = $request->input('id');
+
+        if (empty($id)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $result = $this->slideService->delSlide(['id' => $id]);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+    }
 
 }

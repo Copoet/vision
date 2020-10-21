@@ -91,7 +91,7 @@ class SlideShowService
      * @mail copoet@126.com
      * Date: 2020/8/22/4:59 PM
      */
-    public function delNavigation($where)
+    public function delSlide($where)
     {
 
         return SlideShow::query()->where($where)->update(['status' => 2]);

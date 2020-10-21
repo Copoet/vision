@@ -10,7 +10,6 @@ namespace App\Services;
 
 
 use App\Models\System;
-
 class SystemService
 {
 
@@ -27,7 +26,7 @@ class SystemService
 
         $result = System::query()
             ->where($where)
-            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'addtime', 'update_time', 'status', 'is_delete'])
+            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete'])
             ->toArray();
 
         return $result;
@@ -64,7 +63,7 @@ class SystemService
             })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'addtime', 'update_time', 'status', 'is_delete'])
+            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete'])
             ->toArray();
 
         return $result;

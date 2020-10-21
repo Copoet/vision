@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * Author: copoet
- * Mail: copoet@126.com
- * Date: 2020/8/18/11:55 PM
- */
+
 
 namespace App\Enum;
 
 
-class Menu
+class StockEnum
 {
     const STATUS = [
         1 => '启用',
