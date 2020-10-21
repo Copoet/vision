@@ -9,7 +9,7 @@
 namespace App\Enum;
 
 
-class Users
+class UsersEnum
 {
     const STATUS = [
         1 => '启用',
