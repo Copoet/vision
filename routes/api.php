@@ -69,4 +69,14 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::put('stock/update', 'StockController@updateUser');
     Route::delete('stock/delete', 'StockController@delUser');
 
+    Route::get('article/list', 'ArticleController@articleList');
+    Route::post('article/create', 'ArticleController@createArticle');
+    Route::put('article/update', 'ArticleController@updateArticle');
+    Route::delete('article/delete', 'ArticleController@delArticle');
+
+    Route::get('article/sort/list', 'ArticleSortController@articleSortList');
+    Route::post('article/sort/create', 'ArticleSortController@createArticleSort');
+    Route::put('article/sort//update', 'ArticleSortController@updateArticleSort');
+    Route::delete('article/sort/delete', 'ArticleSortController@delArticleSort');
+
 });
