@@ -60,7 +60,7 @@ class ArticleController extends Controller
         $description = $request->input('description');
         $flag        = $request->input('flag');
 
-        if (empty($name) || empty($url) || empty($status)) {
+        if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }

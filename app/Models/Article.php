@@ -15,6 +15,7 @@ class Article extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['title'];
 
     const CREATED_AT = 'create_time';
 
