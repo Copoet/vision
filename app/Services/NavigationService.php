@@ -63,7 +63,7 @@ class NavigationService
             if (isset($where['keyWords'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
-        })->where()->count();
+        })->count();
 
         $offset = ($page - 1) * $pageSize;
 
