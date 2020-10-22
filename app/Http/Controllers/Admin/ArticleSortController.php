@@ -49,28 +49,22 @@ class ArticleSortController extends Controller
      */
     public function createArticleSort(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
+        $name        = $request->input('sort_name');
+        $sortId      = $request->input('parent_id');
         $status      = $request->input('status');
-        $content     = $request->input('content');
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
-        $flag        = $request->input('flag');
 
         if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
+        $data['sort_name']   = $name;
+        $data['parent_id']   = $sortId;
         $data['status']      = $status;
-        $data['content']     = $content;
         $data['keywords']    = $keywords;
         $data['description'] = $description;
-        $data['flag']        = $flag;
 
         $result = $this->sortService->store($data);
 
@@ -88,14 +82,11 @@ class ArticleSortController extends Controller
      */
     public function updateArticleSort(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
+        $name        = $request->input('sort_name');
+        $sortId      = $request->input('parent_id');
         $status      = $request->input('status');
-        $content     = $request->input('content');
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
-        $flag        = $request->input('flag');
         $id          = $request->input('id');
 
         if (empty($id) || empty($name) || empty($url) || empty($status)) {
@@ -103,14 +94,11 @@ class ArticleSortController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
+        $data['sort_name']   = $name;
+        $data['parent_id']   = $sortId;
         $data['status']      = $status;
-        $data['content']     = $content;
         $data['keywords']    = $keywords;
         $data['description'] = $description;
-        $data['flag']        = $flag;
 
         $result = $this->sortService->update(['id' => $id], $data);
 
@@ -149,8 +137,8 @@ class ArticleSortController extends Controller
     /**
      * @param Request $request
      */
-    public function getSortTree(Request $request){
-
+    public function getSortTree(Request $request)
+    {
 
         $list = $this->sortService->getSortTree();
 
