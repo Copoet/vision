@@ -54,12 +54,20 @@ class ArticleSortService
         })
             ->offset($offset)
             ->limit($pageSize)
-            ->get($columns);
+            ->get($columns)
+            ->toArray();
+
+        $sort = array_column($this->getSort(), 'label', 'id');
+
+        foreach ($result['list'] as &$val) {
+
+            $val['parent_name'] = $sort[$val['parent_id']]??'顶级分类';
+
+        }
 
         return $result;
 
     }
-
 
 
     /**
@@ -101,13 +109,24 @@ class ArticleSortService
     }
 
 
+    public function getSort()
+    {
+        $result = ArticleSort::query()->where(['status' => 1])
+            ->orderBy('id', 'asc')
+            ->get(['id', 'sort_name as label', 'parent_id'])
+            ->toArray();
+
+        return $result;
+    }
+
     public function getSortTree()
     {
         $result = ArticleSort::query()->where(['status' => 1])
             ->orderBy('id', 'asc')
-            ->get(['id', 'sort_name as label','parent_id'])
+            ->get(['id', 'sort_name as label', 'parent_id'])
             ->toArray();
-        $result = CommonService::getTree($result,0);
+        $result = CommonService::getTree($result, 0);
+
         return array_merge($result);
     }
 
