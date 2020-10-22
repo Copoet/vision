@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Models\ArticleSort;
+use App\Services\Common\CommonService;
+
 class ArticleSortService
 {
     /**
@@ -97,4 +99,16 @@ class ArticleSortService
 
         return ArticleSort::query()->where($where)->update($param);
     }
+
+
+    public function getSortTree()
+    {
+        $result = ArticleSort::query()->where(['status' => 1])
+            ->orderBy('id', 'asc')
+            ->get(['id', 'sort_name as label','parent_id'])
+            ->toArray();
+        $result = CommonService::getTree($result,0);
+        return array_merge($result);
+    }
+
 }
