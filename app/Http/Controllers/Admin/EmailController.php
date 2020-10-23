@@ -6,31 +6,31 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Common\CodeService;
-use App\Services\EmailService;
+use App\Services\EmailTemplateService;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
-    protected $emailService;
+    protected $service;
 
 
-    public function __construct(EmailService $service)
+    public function __construct(EmailTemplateService $service)
     {
-        $this->emailService = $service;
+        $this->service = $service;
     }
 
 
     /**
-     * 获取列表
+     * templateList
      * @param Request $request
      */
-    public function emailList(Request $request)
+    public function templateList(Request $request)
     {
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->emailService->getList($param, '*', $page, $pageSize);
+        $list = $this->service->getList($param, '*', $page, $pageSize);
 
         if ($list) {
 
@@ -43,11 +43,11 @@ class EmailController extends Controller
 
 
     /**
-     * 新增Email
+     * createTemplate
      * @param Request $request
      *
      */
-    public function createEmail(Request $request)
+    public function createTemplate(Request $request)
     {
         $name        = $request->input('title');
         $sortId      = $request->input('sort_id');
@@ -72,7 +72,7 @@ class EmailController extends Controller
         $data['description'] = $description;
         $data['flag']        = $flag;
 
-        $result = $this->emailService->store($data);
+        $result = $this->service->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -83,10 +83,10 @@ class EmailController extends Controller
 
 
     /**
-     * 更新Email
+     * updateTemplate
      * @param Request $request
      */
-    public function updateEmail(Request $request)
+    public function updateTemplate(Request $request)
     {
         $name        = $request->input('title');
         $sortId      = $request->input('sort_id');
@@ -112,7 +112,7 @@ class EmailController extends Controller
         $data['description'] = $description;
         $data['flag']        = $flag;
 
-        $result = $this->emailService->update(['id' => $id], $data);
+        $result = $this->service->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -123,11 +123,11 @@ class EmailController extends Controller
     }
 
     /**
-     * 删除Email
+     * delTemplate
      * @param Request $request
      *
      */
-    public function delEmail(Request $request)
+    public function delTemplate(Request $request)
     {
         $id = $request->input('id');
 
@@ -136,7 +136,7 @@ class EmailController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->emailService->del(['id' => $id]);
+        $result = $this->service->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);

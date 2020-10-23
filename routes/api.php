@@ -90,9 +90,9 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::put('email_log/update', 'EmailLogController@updateEmailLog');
     Route::delete('email_log/delete', 'EmailLogController@delEmailLog');
 
-    Route::get('email_template/list', 'EmailTemplateController@articleList');
-    Route::post('email_template/create', 'EmailTemplateController@createArticle');
-    Route::put('email_template/update', 'EmailTemplateController@updateArticle');
-    Route::delete('email_template/delete', 'EmailTemplateController@delArticle');
+    Route::get('email_template/list', 'EmailTemplateController@templateList');
+    Route::post('email_template/create', 'EmailTemplateController@createTemplate');
+    Route::put('email_template/update', 'EmailTemplateController@updateTemplate');
+    Route::delete('email_template/delete', 'EmailTemplateController@delTemplate');
 
 });
