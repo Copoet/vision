@@ -69,4 +69,30 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::put('stock/update', 'StockController@updateUser');
     Route::delete('stock/delete', 'StockController@delUser');
 
+    Route::get('article/list', 'ArticleController@articleList');
+    Route::post('article/create', 'ArticleController@createArticle');
+    Route::put('article/update', 'ArticleController@updateArticle');
+    Route::delete('article/delete', 'ArticleController@delArticle');
+
+    Route::get('article/sort/list', 'ArticleSortController@articleSortList');
+    Route::post('article/sort/create', 'ArticleSortController@createArticleSort');
+    Route::put('article/sort//update', 'ArticleSortController@updateArticleSort');
+    Route::delete('article/sort/delete', 'ArticleSortController@delArticleSort');
+    Route::get('article/sort/tree', 'ArticleSortController@getSortTree');
+
+    Route::get('email/list', 'EmailController@emailList');
+    Route::post('email/create', 'EmailController@createEmail');
+    Route::put('email/update', 'EmailController@updateEmail');
+    Route::delete('email/delete', 'EmailController@delEmail');
+
+    Route::get('email_log/list', 'EmailLogController@emailLogList');
+    Route::post('email_log/create', 'EmailLogController@createEmailLog');
+    Route::put('email_log/update', 'EmailLogController@updateEmailLog');
+    Route::delete('email_log/delete', 'EmailLogController@delEmailLog');
+
+    Route::get('email_template/list', 'EmailTemplateController@templateList');
+    Route::post('email_template/create', 'EmailTemplateController@createTemplate');
+    Route::put('email_template/update', 'EmailTemplateController@updateTemplate');
+    Route::delete('email_template/delete', 'EmailTemplateController@delTemplate');
+
 });
