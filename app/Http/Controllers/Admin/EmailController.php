@@ -21,10 +21,10 @@ class EmailController extends Controller
 
 
     /**
-     * templateList
+     * emailList
      * @param Request $request
      */
-    public function templateList(Request $request)
+    public function emailList(Request $request)
     {
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
@@ -43,11 +43,11 @@ class EmailController extends Controller
 
 
     /**
-     * createTemplate
+     * createEmail
      * @param Request $request
      *
      */
-    public function createTemplate(Request $request)
+    public function createEmail(Request $request)
     {
         $name       = $request->input('username');
         $smtp       = $request->input('smtp');
@@ -81,10 +81,10 @@ class EmailController extends Controller
 
 
     /**
-     * updateTemplate
+     * updateEmail
      * @param Request $request
      */
-    public function updateTemplate(Request $request)
+    public function updateEmail(Request $request)
     {
         $name       = $request->input('username');
         $smtp       = $request->input('smtp');
@@ -118,11 +118,11 @@ class EmailController extends Controller
     }
 
     /**
-     * delTemplate
+     * delEmail
      * @param Request $request
      *
      */
-    public function delTemplate(Request $request)
+    public function delEmail(Request $request)
     {
         $id = $request->input('id');
 
