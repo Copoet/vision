@@ -21,10 +21,10 @@ class EmailTemplateController extends Controller
 
 
     /**
-     * 获取列表
+     * 获取
      * @param Request $request
      */
-    public function articleList(Request $request)
+    public function templateList(Request $request)
     {
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
@@ -43,34 +43,24 @@ class EmailTemplateController extends Controller
 
 
     /**
-     * 新增文章
+     * 新增
      * @param Request $request
      *
      */
-    public function createArticle(Request $request)
+    public function createTemplate(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
-        $status      = $request->input('status');
-        $content     = $request->input('content');
-        $keywords    = $request->input('keywords');
-        $description = $request->input('description');
-        $flag        = $request->input('flag');
+        $name    = $request->input('title');
+        $status  = $request->input('status');
+        $content = $request->input('content');
 
         if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
-        $data['status']      = $status;
-        $data['content']     = $content;
-        $data['keywords']    = $keywords;
-        $data['description'] = $description;
-        $data['flag']        = $flag;
+        $data['title']   = $name;
+        $data['status']  = $status;
+        $data['content'] = $content;
 
         $result = $this->service->store($data);
 
@@ -83,34 +73,24 @@ class EmailTemplateController extends Controller
 
 
     /**
-     * 更新文章
+     * 更新
      * @param Request $request
      */
-    public function updateArticle(Request $request)
+    public function updateTemplate(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
-        $status      = $request->input('status');
-        $content     = $request->input('content');
-        $keywords    = $request->input('keywords');
-        $description = $request->input('description');
-        $flag        = $request->input('flag');
-        $id          = $request->input('id');
-
-        if (empty($id) || empty($name) || empty($url) || empty($status)) {
+        $name    = $request->input('title');
+        $status  = $request->input('status');
+        $content = $request->input('content');
+        $id      = $request->input('id');
+        if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
-        $data['status']      = $status;
-        $data['content']     = $content;
-        $data['keywords']    = $keywords;
-        $data['description'] = $description;
-        $data['flag']        = $flag;
+        $data['title']   = $name;
+        $data['status']  = $status;
+        $data['content'] = $content;
+
 
         $result = $this->service->update(['id' => $id], $data);
 
@@ -123,11 +103,11 @@ class EmailTemplateController extends Controller
     }
 
     /**
-     * 删除文章
+     * 删除
      * @param Request $request
      *
      */
-    public function delArticle(Request $request)
+    public function delTemplate(Request $request)
     {
         $id = $request->input('id');
 

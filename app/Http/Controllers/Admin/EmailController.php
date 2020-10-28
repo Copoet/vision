@@ -21,10 +21,10 @@ class EmailController extends Controller
 
 
     /**
-     * templateList
+     * emailList
      * @param Request $request
      */
-    public function templateList(Request $request)
+    public function emailList(Request $request)
     {
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
@@ -43,34 +43,32 @@ class EmailController extends Controller
 
 
     /**
-     * createTemplate
+     * createEmail
      * @param Request $request
      *
      */
-    public function createTemplate(Request $request)
+    public function createEmail(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
-        $status      = $request->input('status');
-        $content     = $request->input('content');
-        $keywords    = $request->input('keywords');
-        $description = $request->input('description');
-        $flag        = $request->input('flag');
+        $name       = $request->input('username');
+        $smtp       = $request->input('smtp');
+        $password   = $request->input('password');
+        $status     = $request->input('status');
+        $port       = $request->input('port');
+        $is_default = $request->input('id_default');
+
 
         if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
-        $data['status']      = $status;
-        $data['content']     = $content;
-        $data['keywords']    = $keywords;
-        $data['description'] = $description;
-        $data['flag']        = $flag;
+        $data['username']   = $name;
+        $data['smtp']       = $smtp;
+        $data['password']   = $password;
+        $data['status']     = $status;
+        $data['port']       = $port;
+        $data['is_default'] = $is_default;
+
 
         $result = $this->service->store($data);
 
@@ -83,34 +81,31 @@ class EmailController extends Controller
 
 
     /**
-     * updateTemplate
+     * updateEmail
      * @param Request $request
      */
-    public function updateTemplate(Request $request)
+    public function updateEmail(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
-        $status      = $request->input('status');
-        $content     = $request->input('content');
-        $keywords    = $request->input('keywords');
-        $description = $request->input('description');
-        $flag        = $request->input('flag');
-        $id          = $request->input('id');
+        $name       = $request->input('username');
+        $smtp       = $request->input('smtp');
+        $password   = $request->input('password');
+        $status     = $request->input('status');
+        $port       = $request->input('port');
+        $is_default = $request->input('id_default');
+        $id         = $request->input('id');
 
-        if (empty($id) || empty($name) || empty($url) || empty($status)) {
+        if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
-        $data['status']      = $status;
-        $data['content']     = $content;
-        $data['keywords']    = $keywords;
-        $data['description'] = $description;
-        $data['flag']        = $flag;
+        $data['username']   = $name;
+        $data['smtp']       = $smtp;
+        $data['password']   = $password;
+        $data['status']     = $status;
+        $data['port']       = $port;
+        $data['is_default'] = $is_default;
+
 
         $result = $this->service->update(['id' => $id], $data);
 
@@ -123,11 +118,11 @@ class EmailController extends Controller
     }
 
     /**
-     * delTemplate
+     * delEmail
      * @param Request $request
      *
      */
-    public function delTemplate(Request $request)
+    public function delEmail(Request $request)
     {
         $id = $request->input('id');
 
