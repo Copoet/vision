@@ -49,28 +49,18 @@ class EmailTemplateController extends Controller
      */
     public function createArticle(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
-        $status      = $request->input('status');
-        $content     = $request->input('content');
-        $keywords    = $request->input('keywords');
-        $description = $request->input('description');
-        $flag        = $request->input('flag');
+        $name    = $request->input('title');
+        $status  = $request->input('status');
+        $content = $request->input('content');
 
         if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
-        $data['status']      = $status;
-        $data['content']     = $content;
-        $data['keywords']    = $keywords;
-        $data['description'] = $description;
-        $data['flag']        = $flag;
+        $data['title']   = $name;
+        $data['status']  = $status;
+        $data['content'] = $content;
 
         $result = $this->service->store($data);
 
@@ -88,29 +78,19 @@ class EmailTemplateController extends Controller
      */
     public function updateArticle(Request $request)
     {
-        $name        = $request->input('title');
-        $sortId      = $request->input('sort_id');
-        $titlePic    = $request->input('titlepic');
-        $status      = $request->input('status');
-        $content     = $request->input('content');
-        $keywords    = $request->input('keywords');
-        $description = $request->input('description');
-        $flag        = $request->input('flag');
-        $id          = $request->input('id');
-
-        if (empty($id) || empty($name) || empty($url) || empty($status)) {
+        $name    = $request->input('title');
+        $status  = $request->input('status');
+        $content = $request->input('content');
+        $id      = $request->input('id');
+        if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['title']       = $name;
-        $data['sort_id']     = $sortId;
-        $data['titlepic']    = $titlePic;
-        $data['status']      = $status;
-        $data['content']     = $content;
-        $data['keywords']    = $keywords;
-        $data['description'] = $description;
-        $data['flag']        = $flag;
+        $data['title']   = $name;
+        $data['status']  = $status;
+        $data['content'] = $content;
+
 
         $result = $this->service->update(['id' => $id], $data);
 
