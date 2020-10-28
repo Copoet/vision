@@ -21,10 +21,10 @@ class EmailTemplateController extends Controller
 
 
     /**
-     * 获取列表
+     * 获取
      * @param Request $request
      */
-    public function articleList(Request $request)
+    public function templateList(Request $request)
     {
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
@@ -43,11 +43,11 @@ class EmailTemplateController extends Controller
 
 
     /**
-     * 新增文章
+     * 新增
      * @param Request $request
      *
      */
-    public function createArticle(Request $request)
+    public function createTemplate(Request $request)
     {
         $name    = $request->input('title');
         $status  = $request->input('status');
@@ -73,10 +73,10 @@ class EmailTemplateController extends Controller
 
 
     /**
-     * 更新文章
+     * 更新
      * @param Request $request
      */
-    public function updateArticle(Request $request)
+    public function updateTemplate(Request $request)
     {
         $name    = $request->input('title');
         $status  = $request->input('status');
@@ -103,11 +103,11 @@ class EmailTemplateController extends Controller
     }
 
     /**
-     * 删除文章
+     * 删除
      * @param Request $request
      *
      */
-    public function delArticle(Request $request)
+    public function delTemplate(Request $request)
     {
         $id = $request->input('id');
 
