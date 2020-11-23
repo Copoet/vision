@@ -15,7 +15,7 @@ class AuthRoleRuleController extends Controller
 
     public function __construct(AuthRoleRuleService $service)
     {
-        $this->authRoleRuleService= $service;
+        $this->authRoleRuleService = $service;
     }
 
 
@@ -44,8 +44,8 @@ class AuthRoleRuleController extends Controller
      * 添加操作
      * @param Request $request
      */
-    public function create(Request $request){
-
+    public function create(Request $request)
+    {
 
 
     }
@@ -55,7 +55,8 @@ class AuthRoleRuleController extends Controller
      * 更新操作
      * @param Request $request
      */
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
     }
 
@@ -64,8 +65,22 @@ class AuthRoleRuleController extends Controller
      * 删除操作
      * @param Request $request
      */
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
 
+        if (empty($id)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $result = $this->authRoleRuleService->del(['id' => $id]);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
 
     }
