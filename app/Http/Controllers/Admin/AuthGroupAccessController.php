@@ -66,7 +66,20 @@ class AuthGroupAccessController extends Controller
      */
     public function delete(Request $request){
 
+        $id = $request->input('id');
 
+        if (empty($id)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $result = $this->authRuleService->del(['id' => $id]);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
     }
 }
