@@ -95,4 +95,26 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::put('email_template/update', 'EmailTemplateController@updateTemplate');
     Route::delete('email_template/delete', 'EmailTemplateController@delTemplate');
 
+
+    Route::get('auth_rule/list', 'AuthRuleController@list');
+    Route::post('auth_rule/create', 'AuthRuleController@create');
+    Route::put('auth_rule/update', 'AuthRuleController@update');
+    Route::delete('auth_rule/delete', 'AuthRuleController@delete');
+
+    Route::get('auth_group_access/list', 'AuthGroupAccessController@list');
+    Route::post('auth_group_access/create', 'AuthGroupAccessController@create');
+    Route::put('auth_group_access/update', 'AuthGroupAccessController@update');
+    Route::delete('auth_group_access/delete', 'AuthGroupAccessController@delete');
+
+    Route::get('auth_role_rule/list', 'AuthRoleRuleController@list');
+    Route::post('auth_role_rule/create', 'AuthRoleRuleController@create');
+    Route::put('auth_role_rule/update', 'AuthRoleRuleController@update');
+    Route::delete('auth_role_rule/delete', 'AuthRoleRuleController@delete');
+
+    Route::get('auth_manager/list', 'AuthManagerGroupController@list');
+    Route::post('auth_manager/create', 'AuthManagerGroupController@create');
+    Route::put('auth_manager/update', 'AuthManagerGroupController@update');
+    Route::delete('auth_manager/delete', 'AuthManagerGroupController@delete');
+
+
 });
