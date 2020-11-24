@@ -46,7 +46,28 @@ class AuthRoleRuleController extends Controller
      */
     public function create(Request $request)
     {
+        $name    = $request->input('name');
+        $action  = $request->input('action');
+        $status  = $request->input('status');
+        $groupId = $request->input('group_id');
 
+        if (empty($name) || empty($groupId) || empty($action)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data['group_id'] = $groupId;
+        $data['name']     = $name;
+        $data['status']   = $status;
+        $data['action']   = $action;
+
+        $result = $this->authRoleRuleService->store($data);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
     }
 
@@ -57,6 +78,31 @@ class AuthRoleRuleController extends Controller
      */
     public function update(Request $request)
     {
+        $name     = $request->input('name');
+        $action   = $request->input('action');
+        $status   = $request->input('status');
+        $groupId  = $request->input('group_id');
+        $isDelete = $request->input('group_id');
+        $id       = $request->input('id');
+
+        if (empty($name) || empty($groupId) || empty($action)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data['group_id']  = $groupId;
+        $data['name']      = $name;
+        $data['status']    = $status;
+        $data['action']    = $action;
+        $data['id_delete'] = $isDelete;
+
+        $result = $this->authRoleRuleService->update(['id' => $id], $data);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
     }
 
