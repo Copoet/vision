@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Services\AuthManagerGroupService;
 use App\Services\Common\CodeService;
@@ -45,7 +46,27 @@ class AuthManagerGroupController extends Controller
      */
     public function create(Request $request)
     {
+        $name        = $request->input('name');
+        $status      = $request->input('status');
+        $description = $request->input('description');
 
+        if (empty($name) || empty($status)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+
+        $data['group_name']  = $name;
+        $data['description'] = $description;
+        $data['status']      = $status;
+
+        $result = $this->authManagerGroup->store($data);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
     }
 
@@ -56,7 +77,27 @@ class AuthManagerGroupController extends Controller
      */
     public function update(Request $request)
     {
+        $name        = $request->input('name');
+        $status      = $request->input('status');
+        $description = $request->input('description');
+        $id          = $request->input('id');
 
+        if (empty($name) || empty($status)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data['group_name']  = $name;
+        $data['description'] = $description;
+        $data['status']      = $status;
+
+        $result = $this->authManagerGroup->update(['id' => $id], $data);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
     }
 
 

@@ -51,7 +51,7 @@ class AuthRoleRuleController extends Controller
         $status  = $request->input('status');
         $groupId = $request->input('group_id');
 
-        if (empty($name) || empty($menuId) || empty($action)) {
+        if (empty($name) || empty($groupId) || empty($action)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -85,7 +85,7 @@ class AuthRoleRuleController extends Controller
         $isDelete = $request->input('group_id');
         $id       = $request->input('id');
 
-        if (empty($name) || empty($menuId) || empty($action)) {
+        if (empty($name) || empty($groupId) || empty($action)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
