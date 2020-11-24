@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 
 class AuthGroupAccessController extends Controller
 {
-    protected $authGroupAccessService;
+    protected $authGroupAccess;
 
 
     public function __construct(AuthGroupAccessService $service)
     {
-        $this->authGroupAccessService= $service;
+        $this->authGroupAccess = $service;
     }
 
 
@@ -30,7 +30,7 @@ class AuthGroupAccessController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authGroupAccessService->getList($param, $page, $pageSize);
+        $list = $this->authGroupAccess->getList($param, $page, $pageSize);
         if ($list) {
             $this->returnSuccess($list);
         } else {
@@ -44,8 +44,29 @@ class AuthGroupAccessController extends Controller
      * 添加操作
      * @param Request $request
      */
-    public function create(Request $request){
+    public function create(Request $request)
+    {
+        $id      = $request->input('id');
+        $uid     = $request->input('uid');
+        $groupId = $request->input('group_id');
 
+        if (empty($name) || empty($groupId)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+
+        $data['id']       = $id;
+        $data['uid']      = $uid;
+        $data['group_id'] = $groupId;
+
+        $result = $this->authGroupAccess->store($data);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
 
     }
@@ -55,8 +76,30 @@ class AuthGroupAccessController extends Controller
      * 更新操作
      * @param Request $request
      */
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
+        $id      = $request->input('id');
+        $uid     = $request->input('uid');
+        $groupId = $request->input('group_id');
+
+        if (empty($name) || empty($groupId)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+
+        $data['id']       = $id;
+        $data['uid']      = $uid;
+        $data['group_id'] = $groupId;
+
+        $result = $this->authGroupAccess->update($data);
+
+        if ($result) {
+            $this->returnSuccess($result);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
     }
 
 
@@ -64,7 +107,8 @@ class AuthGroupAccessController extends Controller
      * 删除操作
      * @param Request $request
      */
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
 
         $id = $request->input('id');
 
@@ -72,8 +116,7 @@ class AuthGroupAccessController extends Controller
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
-
-        $result = $this->authRuleService->del(['id' => $id]);
+        $result = $this->authGroupAccess->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);
