@@ -14,7 +14,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.25",
         "laravel/tinker": "^2.0",
-        "tymon/jwt-auth": "1.0.0-rc.5",
+        "tymon/jwt-auth": "dev-develop",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
