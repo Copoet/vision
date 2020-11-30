@@ -26,7 +26,7 @@ class ManagerService
         $result = Manager::query()
             ->where('name', $name)
             ->where('status', 1)
-            ->first(['uuid', 'status', 'password', 'token'])
+            ->first(['uuid', 'status', 'password', 'remember_token'])
             ->toArray();
 
         return $result;

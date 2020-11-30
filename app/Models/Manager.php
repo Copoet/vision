@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Enum\ManagerEnum;
-class Manager extends Model
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class Manager extends Authenticatable implements JWTSubject
 {
     //
 
@@ -39,5 +43,17 @@ class Manager extends Model
     public function getUpdateTimeAttribute($value){
 
         return date('Y-m-d H:i:s',strtotime($value));
+    }
+
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+
+    public function getJWTCustomClaims()
+    {
+        return[];
     }
 }

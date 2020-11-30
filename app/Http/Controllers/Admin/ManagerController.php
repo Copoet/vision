@@ -85,7 +85,7 @@ class ManagerController extends Controller
         }
 
         $data['name']     = $userName;
-        $data['password'] = CommonService::generatePass($userName, $passWord);
+        $data['password'] = password_hash($passWord,PASSWORD_DEFAULT);
         $data['uuid']     = CommonService::getUuid();
         $data['status']   = $status;
         $data['up_ip']    = $request->getClientIp();
