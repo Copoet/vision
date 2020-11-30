@@ -33,10 +33,7 @@ class LoginController extends Controller
         }
         $managerInfo = $manager->getManagerInfo($name);
 
-//        $pass = ;
-
         $token = auth()->attempt(['name' => $name, 'password' => $password], true);
-
         if ($token) {
             $update['up_ip']     = $request->getClientIp();
             $update['last_time'] = date('Y-m-d H:i:s', time());
@@ -55,6 +52,19 @@ class LoginController extends Controller
             $this->returnFail(CodeService::PUBLIC_LOGIN_ERROR);
         }
 
+
+    }
+
+
+    /**
+     * 退出登录
+     */
+    public function logout()
+    {
+
+        auth()->logout();
+
+        $this->returnSuccess(CodeService::PUBLIC_SUCCESS);
 
     }
 

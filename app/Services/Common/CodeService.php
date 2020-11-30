@@ -24,6 +24,7 @@ class CodeService
     const PUBLIC_USERNAME_ALREADY_EXIST = 2007;
     const PUBLIC_PHONE_ALREADY_EXIST    = 2008;
     const PUBLIC_EMAIL_ALREADY_EXIST    = 2009;
+    const PUBLIC_LOGOUT_SUCCESS         = 2010;
     //短信类
     const MESSAGE_TAG_ERROR            = 3001;
     const MESSAGE_FORMAT_ERROR         = 3002;
@@ -48,6 +49,7 @@ class CodeService
         self::PUBLIC_ERROR                  => '处理失败',
         self::PUBLIC_PARAMS_NULL            => '操作参数为空',
         self::PUBLIC_LOGIN_ERROR            => '登陆失败，账号或密码错误',
+        self::PUBLIC_LOGOUT_SUCCESS         => '退出成功',
         self::PUBLIC_PARAMS_ILLEGAL         => '参数非法',
         self::PUBLIC_PARAMS_ALREADY_EXIST   => '数据已存在',
         self::PUBLIC_PARAMS_LACK            => '缺少参数',
