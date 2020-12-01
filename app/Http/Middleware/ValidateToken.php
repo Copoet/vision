@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Services\Common\CodeService;
-use App\Services\ManagerService;
 
 class ValidateToken
 {
@@ -17,17 +16,12 @@ class ValidateToken
      */
     public function handle($request, Closure $next)
     {
-        $token = $request->input('token');
-        if (empty($token)) {
-            return Response()->json(['code'   => CodeService::PUBLIC_PARAMS_NULL,
-                'msg'    => '参数为空',
-                'status' => false,
-                'data'   => '']);
-        }
 
-        $manager     = new ManagerService();
-        $checkResult = $manager->checkManagerToken($token);
-        if (empty($checkResult)) {
+
+        $result = auth()->check($request);
+
+        if (!$result) {
+
             return Response()->json([
                 'code'   => CodeService::PUBLIC_TOKEN_ERROR,
                 'msg'    => '请重新登录',

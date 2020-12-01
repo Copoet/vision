@@ -34,6 +34,7 @@ class LoginController extends Controller
         $managerInfo = $manager->getManagerInfo($name);
 
         $token = auth()->attempt(['name' => $name, 'password' => $password], true);
+
         if ($token) {
             $update['up_ip']     = $request->getClientIp();
             $update['last_time'] = date('Y-m-d H:i:s', time());
@@ -66,7 +67,6 @@ class LoginController extends Controller
     {
 
         auth()->logout();
-
         $this->returnSuccess(CodeService::PUBLIC_SUCCESS);
 
     }
