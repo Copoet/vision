@@ -23,6 +23,8 @@ class Manager extends Authenticatable implements JWTSubject
 
     const UPDATED_AT = 'update_time';
 
+    protected $fillable = ['name'];
+
     public function getStatusAttribute($value)
     {
 
