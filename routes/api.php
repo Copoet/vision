@@ -22,15 +22,14 @@ use Illuminate\Support\Facades\Route;
 //login
 Route::group(['namespace' => 'Admin'], function () {
     Route::post('login', 'LoginController@login');
-
-
+    Route::get('logout', 'LoginController@logout');
 });
 
 
 //common 
 Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function () {
 
-    Route::get('logout', 'LoginController@logout');
+
 
     Route::get('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@createManager');
