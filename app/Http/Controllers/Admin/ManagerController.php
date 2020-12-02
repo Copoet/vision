@@ -147,24 +147,21 @@ class ManagerController extends Controller
     }
 
 
+
     /**
      * 删除管理员
-     * @param Request $request
-     * @author copoet
-     * @mail copoet@126.com
-     * Date: 2020/8/25/4:05 PM
+     * @param int $id
      */
-    public function delManager(Request $request)
+    public function delManager(int $id)
     {
 
-        $uuid = $request->input('uuid');
 
-        if (empty($uuid)) {
+        if (empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->managerService->delManager(['uuid' => $uuid]);
+        $result = $this->managerService->delManager(['id' => $id]);
 
         if ($result) {
 

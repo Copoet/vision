@@ -34,7 +34,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::get('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@createManager');
     Route::post('manager/update/{id}', 'ManagerController@updateManager');
-    Route::delete('manager/delete', 'ManagerController@delManager');
+    Route::delete('manager/delete/{id}', 'ManagerController@delManager');
 
     Route::get('menu/list', 'MenuController@menuList');
     Route::any('menu/tree', 'MenuController@menuTree');
