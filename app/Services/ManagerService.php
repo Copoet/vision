@@ -86,7 +86,7 @@ class ManagerService
         $result['total'] = Manager::query()
             ->where(function ($query) use ($where) {
                 if (isset($where['keyword'])) {
-                    $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                    $query->where('name', 'like', '%' . $where['keyword'] . '%');
                 }
                 if (isset($where['is_delete'])) {
                     $query->where('is_delete',$where['is_delete']);
@@ -97,7 +97,7 @@ class ManagerService
 
         $result['list'] = Manager::query()->where(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
             if (isset($where['is_delete'])) {
                 $query->where('is_delete',$where['is_delete']);
