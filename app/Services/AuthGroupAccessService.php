@@ -41,7 +41,7 @@ class AuthGroupAccessService
     {
 
         $result['total'] = AuthGroupAccess::query(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
+            if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
@@ -49,7 +49,7 @@ class AuthGroupAccessService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = AuthGroupAccess::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
         })

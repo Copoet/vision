@@ -85,7 +85,7 @@ class ManagerService
         $where['is_delete'] = 2;
         $result['total'] = Manager::query()
             ->where(function ($query) use ($where) {
-                if (isset($where['keyWords'])) {
+                if (isset($where['keyword'])) {
                     $query->where('name', 'like', '%' . $where['keyWords'] . '%');
                 }
                 if (isset($where['is_delete'])) {
@@ -96,7 +96,7 @@ class ManagerService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = Manager::query()->where(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
+            if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
             if (isset($where['is_delete'])) {

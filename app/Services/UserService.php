@@ -46,7 +46,7 @@ class UserService
     {
         $result['total'] = Users::query()
             ->where(function ($query) use ($param) {
-                if (isset($param['keyWords'])) {
+                if (isset($param['keyword'])) {
                     $query->where('username', 'like', '%' . $param['keyWords'] . '%');
                 }
             })->count();
@@ -54,7 +54,7 @@ class UserService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = Users::query()->where(function ($query) use ($param) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('username', 'like', '%' . $param['keyWords'] . '%');
             }
         })
