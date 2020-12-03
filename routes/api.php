@@ -22,20 +22,19 @@ use Illuminate\Support\Facades\Route;
 //login
 Route::group(['namespace' => 'Admin'], function () {
     Route::post('login', 'LoginController@login');
-
-
+    Route::get('logout', 'LoginController@logout');
 });
 
 
 //common 
 Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function () {
 
-    Route::get('logout', 'LoginController@logout');
+
 
     Route::get('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@createManager');
-    Route::put('manager/update', 'ManagerController@updateManager');
-    Route::delete('manager/delete', 'ManagerController@delManager');
+    Route::post('manager/update/{id}', 'ManagerController@updateManager');
+    Route::post('manager/delete/{id}' ,'ManagerController@delManager');
 
     Route::get('menu/list', 'MenuController@menuList');
     Route::any('menu/tree', 'MenuController@menuTree');

@@ -14,6 +14,8 @@ use App\Services\Common\CodeService;
 use App\Services\Common\CommonService;
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Component\Console\Input\Input;
 
 class ManagerController extends Controller
 {
@@ -101,38 +103,37 @@ class ManagerController extends Controller
     }
 
 
+
     /**
      * 更新管理员信息
+     * @param int $id
      * @param Request $request
-     * @author copoet
-     * @mail copoet@126.com
-     * Date: 2020/8/25/4:00 PM
      */
-    public function updateManager(Request $request)
+    public function updateManager(int $id,Request $request)
     {
 
         $userName = $request->input('name');
         $passWord = $request->input('pass_word');
         $status   = $request->input('status');
-        $uuid     = $request->input('uuid');
 
-        if (empty($userName) || empty($passWord) || empty($status) || empty($uuid)) {
+
+        if (empty($userName) || empty($passWord) || empty($status) || empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
         $managerInfo = $this->managerService->getManagerInfo($userName);
 
-        if ($managerInfo && $uuid !== $managerInfo['uuid']) {
+        if ($managerInfo && $id !== $managerInfo['id']) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
         }
 
         $date['name']     = $userName;
-        $date['password'] = CommonService::generatePass($userName, $passWord);
+        $date['password'] = password_hash($passWord,PASSWORD_DEFAULT);
         $date['status']   = $status;
 
-        $result = $this->managerService->save($date, ['uuid' => $uuid]);
+        $result = $this->managerService->save($date, ['id' => $id]);
 
         if ($result) {
 
@@ -146,24 +147,21 @@ class ManagerController extends Controller
     }
 
 
+
     /**
      * 删除管理员
-     * @param Request $request
-     * @author copoet
-     * @mail copoet@126.com
-     * Date: 2020/8/25/4:05 PM
+     * @param int $id
      */
-    public function delManager(Request $request)
+    public function delManager(int $id)
     {
 
-        $uuid = $request->input('uuid');
 
-        if (empty($uuid)) {
+        if (empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->managerService->delManager(['uuid' => $uuid]);
+        $result = $this->managerService->delManager(['id' => $id]);
 
         if ($result) {
 

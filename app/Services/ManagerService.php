@@ -26,8 +26,7 @@ class ManagerService
         $result = Manager::query()
             ->where('name', $name)
             ->where('status', 1)
-            ->first(['uuid', 'status', 'password', 'remember_token'])
-            ->toArray();
+            ->first(['uuid', 'status', 'password', 'remember_token']);
 
         return $result;
     }
@@ -117,8 +116,7 @@ class ManagerService
      */
     public function store($param)
     {
-
-        return Manager::query()->create($param);
+        return Manager::query()->forceCreate($param);
     }
 
 

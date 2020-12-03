@@ -34,15 +34,19 @@ class LoginController extends Controller
         $managerInfo = $manager->getManagerInfo($name);
 
         $token = auth()->attempt(['name' => $name, 'password' => $password], true);
+
         if ($token) {
             $update['up_ip']     = $request->getClientIp();
             $update['last_time'] = date('Y-m-d H:i:s', time());
             $loginResult         = $manager->save($update, ['uuid' => $managerInfo['uuid']]);
 
-            if ($loginResult) {
-                $data['access_token'] = $token;
-                $data['token_type']   = 'bearer';
 
+            if ($loginResult) {
+                $data['access_token']      = $token;
+                $data['token_type']        = 'bearer';
+                $data['user']['id']        = auth()->user()->id;
+                $data['user']['name']      = auth()->user()->name;
+                $data['user']['last_time'] = auth()->user()->last_time;
                 $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
             } else {
                 $this->returnFail(CodeService::PUBLIC_LOGIN_ERROR);
@@ -63,7 +67,6 @@ class LoginController extends Controller
     {
 
         auth()->logout();
-
         $this->returnSuccess(CodeService::PUBLIC_SUCCESS);
 
     }
