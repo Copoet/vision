@@ -82,10 +82,14 @@ class ManagerService
     public function getManagerList($where, $page, $pageSize, $columns = ['*'])
     {
 
+        $where['is_delete'] = 2;
         $result['total'] = Manager::query()
             ->where(function ($query) use ($where) {
-                if (isset($param['keyWords'])) {
+                if (isset($where['keyWords'])) {
                     $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                }
+                if (isset($where['is_delete'])) {
+                    $query->where('is_delete',$where['status']);
                 }
             })->count();
 
@@ -94,6 +98,9 @@ class ManagerService
         $result['list'] = Manager::query()->where(function ($query) use ($where) {
             if (isset($where['keyWords'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+            }
+            if (isset($where['is_delete'])) {
+                $query->where('is_delete',$where['is_delete']);
             }
         })
             ->offset($offset)
