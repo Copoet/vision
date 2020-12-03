@@ -89,7 +89,7 @@ class ManagerService
                     $query->where('name', 'like', '%' . $where['keyWords'] . '%');
                 }
                 if (isset($where['is_delete'])) {
-                    $query->where('is_delete',$where['status']);
+                    $query->where('is_delete',$where['is_delete']);
                 }
             })->count();
 
