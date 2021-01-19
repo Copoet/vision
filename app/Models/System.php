@@ -21,14 +21,14 @@ class System extends Model
     const UPDATED_AT = 'update_time';
 
 
-    public function getStatusAttribute($value)
+    public function getStatusStrAttribute($value)
     {
 
         return SystemEnum::STATUS[$value];
     }
 
 
-    public function getIsDeleteAttribute($value)
+    public function getIsDeleteStrAttribute($value)
     {
         return SystemEnum::DELETE[$value];
     }
