@@ -79,7 +79,7 @@ class ManagerService
      * @mail copoet@126.com
      * Date: 2020/8/24/4:51 PM
      */
-    public function getManagerList($where, $page, $pageSize, $columns = ['*'])
+    public function getManagerList($where, $page, $pageSize, $columns = ['*','status as status_str','is_delete as is_delete_str'])
     {
 
         $where['is_delete'] = 2;

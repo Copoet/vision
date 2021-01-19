@@ -63,7 +63,7 @@ class SystemService
             })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete'])
+            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete','status as status_str','is_delete as is_delete_str'])
             ->toArray();
 
         return $result;

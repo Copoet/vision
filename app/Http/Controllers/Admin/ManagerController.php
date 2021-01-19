@@ -45,7 +45,7 @@ class ManagerController extends Controller
 
         $param = $request->all();
 
-        $list = $this->managerService->getManagerList($param, $page, $pageSize);
+        $list = $this->managerService->getManagerList($param,$page, $pageSize);
 
         if ($list) {
 

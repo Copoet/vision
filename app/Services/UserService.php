@@ -60,7 +60,7 @@ class UserService
         })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['id', 'username', 'phone', 'email', 'uuid', 'reg_ip', 'password', 'is_delete', 'create_time', 'update_time', 'last_time', 'status', 'reg_time'])
+            ->get(['id', 'username', 'phone', 'email', 'uuid', 'reg_ip', 'password', 'is_delete', 'create_time', 'update_time', 'last_time', 'status', 'reg_time','status as status_str','is_delete as is_delete_str'])
             ->toArray();
 
         return $result;
