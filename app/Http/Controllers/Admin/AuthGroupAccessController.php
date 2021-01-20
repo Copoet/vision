@@ -30,7 +30,7 @@ class AuthGroupAccessController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authGroupAccess->getList($param,'*,status as status_str,is_delete as is_delete_str', $page, $pageSize);
+        $list = $this->authGroupAccess->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
         if ($list) {
             $this->returnSuccess($list);
         } else {
