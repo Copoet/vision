@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Common\CodeService;
-use App\Services\EmailTemplateService;
+use App\Services\EmailService;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
@@ -14,7 +14,7 @@ class EmailController extends Controller
     protected $service;
 
 
-    public function __construct(EmailTemplateService $service)
+    public function __construct(EmailService $service)
     {
         $this->service = $service;
     }
@@ -57,7 +57,7 @@ class EmailController extends Controller
         $is_default = $request->input('id_default');
 
 
-        if (empty($name) || empty($content) || empty($status)) {
+        if (empty($name) || empty($password) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
