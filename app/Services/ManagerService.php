@@ -79,21 +79,28 @@ class ManagerService
      * @mail copoet@126.com
      * Date: 2020/8/24/4:51 PM
      */
-    public function getManagerList($where, $page, $pageSize, $columns = ['*'])
+    public function getManagerList($where, $page, $pageSize, $columns = ['*','status as status_str','is_delete as is_delete_str'])
     {
 
+        $where['is_delete'] = 2;
         $result['total'] = Manager::query()
             ->where(function ($query) use ($where) {
-                if (isset($param['keyWords'])) {
-                    $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                if (isset($where['keyword'])) {
+                    $query->where('name', 'like', '%' . $where['keyword'] . '%');
+                }
+                if (isset($where['is_delete'])) {
+                    $query->where('is_delete',$where['is_delete']);
                 }
             })->count();
 
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = Manager::query()->where(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+            if (isset($where['keyword'])) {
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
+            }
+            if (isset($where['is_delete'])) {
+                $query->where('is_delete',$where['is_delete']);
             }
         })
             ->offset($offset)

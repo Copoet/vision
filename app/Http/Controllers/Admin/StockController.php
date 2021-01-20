@@ -38,7 +38,7 @@ class StockController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->stockService->getStockList($param, $page, $pageSize);
+        $list = $this->stockService->getStockList($param,'*,status as status_str,is_delete as is_delete_str', $page, $pageSize);
 
         if ($list) {
 

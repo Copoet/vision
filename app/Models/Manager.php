@@ -25,14 +25,14 @@ class Manager extends Authenticatable implements JWTSubject
 
     protected $fillable = ['name'];
 
-    public function getStatusAttribute($value)
+    public function getStatusStrAttribute($value)
     {
 
         return ManagerEnum::STATUS[$value];
     }
 
 
-    public function getIsDeleteAttribute($value)
+    public function getIsDeleteStrAttribute($value)
     {
         return ManagerEnum::DELETE[$value];
     }

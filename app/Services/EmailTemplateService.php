@@ -40,7 +40,7 @@ class EmailTemplateService
     {
 
         $result['total'] = EmailTemplate::query(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
+            if (isset($where['v'])) {
                 $query->where('title', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
@@ -48,7 +48,7 @@ class EmailTemplateService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = EmailTemplate::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('title', 'like', '%' . $where['keyWords'] . '%');
             }
         })

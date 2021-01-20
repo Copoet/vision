@@ -41,7 +41,7 @@ class AuthManagerGroupService
     {
 
         $result['total'] = AuthManagerGroup::query(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
+            if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
@@ -49,7 +49,7 @@ class AuthManagerGroupService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = AuthManagerGroup::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
         })

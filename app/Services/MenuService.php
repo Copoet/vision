@@ -48,7 +48,7 @@ class MenuService
 
         $result['total'] = Menu::query()
             ->where(function ($query) use ($where) {
-                if (isset($param['keyWords'])) {
+                if (isset($param['keyword'])) {
                     $query->where('name', 'like', '%' . $where['keyWords'] . '%');
                 }
             })->count();
@@ -56,7 +56,7 @@ class MenuService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = Menu::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
         })

@@ -14,8 +14,6 @@ use App\Services\Common\CodeService;
 use App\Services\Common\CommonService;
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Http\FormRequest;
-use Symfony\Component\Console\Input\Input;
 
 class ManagerController extends Controller
 {
@@ -45,7 +43,7 @@ class ManagerController extends Controller
 
         $param = $request->all();
 
-        $list = $this->managerService->getManagerList($param, $page, $pageSize);
+        $list = $this->managerService->getManagerList($param,$page, $pageSize);
 
         if ($list) {
 
@@ -87,7 +85,7 @@ class ManagerController extends Controller
         }
 
         $data['name']     = $userName;
-        $data['password'] = password_hash($passWord,PASSWORD_DEFAULT);
+        $data['password'] = password_hash($passWord, PASSWORD_DEFAULT);
         $data['uuid']     = CommonService::getUuid();
         $data['status']   = $status;
         $data['up_ip']    = $request->getClientIp();
@@ -103,13 +101,12 @@ class ManagerController extends Controller
     }
 
 
-
     /**
      * 更新管理员信息
      * @param int $id
      * @param Request $request
      */
-    public function updateManager(int $id,Request $request)
+    public function updateManager(int $id, Request $request)
     {
 
         $userName = $request->input('name');
@@ -117,7 +114,7 @@ class ManagerController extends Controller
         $status   = $request->input('status');
 
 
-        if (empty($userName) || empty($passWord) || empty($status) || empty($id)) {
+        if (empty($userName) || empty($status) || empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -129,11 +126,15 @@ class ManagerController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
         }
 
-        $date['name']     = $userName;
-        $date['password'] = password_hash($passWord,PASSWORD_DEFAULT);
-        $date['status']   = $status;
+        if (!empty($passWord)) {
+            $data['password'] = password_hash($passWord, PASSWORD_DEFAULT);
+        }
 
-        $result = $this->managerService->save($date, ['id' => $id]);
+
+        $data['name']   = $userName;
+        $data['status'] = $status;
+
+        $result = $this->managerService->save($data, ['id' => $id]);
 
         if ($result) {
 
@@ -145,7 +146,6 @@ class ManagerController extends Controller
         }
 
     }
-
 
 
     /**

@@ -21,14 +21,14 @@ class Menu extends Model
     const UPDATED_AT = 'update_time';
 
 
-    public function getStatusAttribute($value)
+    public function getStatusStrAttribute($value)
     {
 
         return MenuEnum::STATUS[$value];
     }
 
 
-    public function getIsDeleteAttribute($value)
+    public function getIsDeleteStrAttribute($value)
     {
         return MenuEnum::DELETE[$value];
     }

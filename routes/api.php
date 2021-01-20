@@ -26,43 +26,43 @@ Route::group(['namespace' => 'Admin'], function () {
 });
 
 
-//common 
+//common
 Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function () {
 
 
 
     Route::get('manager/list', 'ManagerController@managerList');
     Route::post('manager/create', 'ManagerController@createManager');
-    Route::post('manager/update/{id}', 'ManagerController@updateManager');
+    Route::put('manager/update/{id}', 'ManagerController@updateManager');
     Route::post('manager/delete/{id}' ,'ManagerController@delManager');
 
     Route::get('menu/list', 'MenuController@menuList');
     Route::any('menu/tree', 'MenuController@menuTree');
     Route::post('menu/create', 'MenuController@createMenu');
-    Route::put('menu/update', 'MenuController@updateMenu');
+    Route::post('menu/update', 'MenuController@updateMenu');
     Route::delete('menu/delete', 'MenuController@delMenu');
     Route::any('menu/side_menu', 'MenuController@sideMenu');
 
 
     Route::get('system/list', 'SystemController@systemList');
     Route::post('system/create', 'SystemController@createSystem');
-    Route::put('system/update', 'SystemController@updateSystem');
+    Route::post('system/update', 'SystemController@updateSystem');
     Route::delete('system/delete', 'SystemController@delSystem');
 
     Route::get('nav/list', 'NavigationController@navigationList');
     Route::post('nav/create', 'NavigationController@createNavigation');
-    Route::put('nav/update', 'NavigationController@updateNavigation');
+    Route::post('nav/update', 'NavigationController@updateNavigation');
     Route::delete('nav/delete', 'NavigationController@delNavigation');
 
     Route::get('slide/list', 'SlideShowController@slideList');
     Route::post('slide/create', 'SlideShowController@createSlide');
-    Route::put('slide/update', 'SlideShowController@updateSlide');
+    Route::post('slide/update', 'SlideShowController@updateSlide');
     Route::delete('slide/delete', 'SlideShowController@delSlide');
 
 
     Route::get('user/list', 'UserController@userList');
     Route::post('user/create', 'UserController@createUser');
-    Route::put('user/update', 'UserController@updateUser');
+    Route::post('user/update', 'UserController@updateUser');
     Route::delete('user/delete', 'UserController@delUser');
 
 
@@ -73,7 +73,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
 
     Route::get('article/list', 'ArticleController@articleList');
     Route::post('article/create', 'ArticleController@createArticle');
-    Route::put('article/update', 'ArticleController@updateArticle');
+    Route::post('article/update', 'ArticleController@updateArticle');
     Route::delete('article/delete', 'ArticleController@delArticle');
 
     Route::get('article/sort/list', 'ArticleSortController@articleSortList');

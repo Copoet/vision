@@ -41,7 +41,7 @@ class ArticleService
     {
 
         $result['total'] = Article::query(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
+            if (isset($where['keyword'])) {
                 $query->where('title', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
@@ -49,7 +49,7 @@ class ArticleService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = Article::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('title', 'like', '%' . $where['keyWords'] . '%');
             }
         })

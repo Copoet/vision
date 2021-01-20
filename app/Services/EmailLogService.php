@@ -40,7 +40,7 @@ class EmailLogService
     {
 
         $result['total'] = EmailLog::query(function ($query) use ($where) {
-            if (isset($where['keyWords'])) {
+            if (isset($where['keyword'])) {
                 $query->where('title', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
@@ -48,7 +48,7 @@ class EmailLogService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = EmailLog::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('title', 'like', '%' . $where['keyWords'] . '%');
             }
         })

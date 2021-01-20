@@ -20,13 +20,13 @@ class AuthManagerGroup extends Model
     const UPDATED_AT = 'update_time';
 
 
-    public function getStatusAttribute($value)
+    public function getStatusStrAttribute($value)
     {
         return AuthManagerGroupEnum::STATUS[$value];
     }
 
 
-    public function getIsDeleteAttribute($value)
+    public function getIsDeleteStrAttribute($value)
     {
         return AuthManagerGroupEnum::DELETE[$value];
     }

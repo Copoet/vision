@@ -21,14 +21,14 @@ class Stock extends Model
 
 
 
-    public function getStatusAttribute($value)
+    public function getStatusStrAttribute($value)
     {
 
         return StockEnum::STATUS[$value];
     }
 
 
-    public function getIsDeleteAttribute($value)
+    public function getIsDeleteStrAttribute($value)
     {
         return StockEnum::DELETE[$value];
     }

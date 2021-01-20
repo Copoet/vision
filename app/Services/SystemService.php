@@ -48,7 +48,7 @@ class SystemService
     {
 
         $result['total'] = System::query()->where(function ($query) use ($where) {
-            if (isset($param['keyWords'])) {
+            if (isset($param['keyword'])) {
                 $query->where('sys_name', 'like', '%' . $where['keyWords'] . '%');
             }
         })->count();
@@ -57,13 +57,13 @@ class SystemService
 
         $result['list'] = System::query()
             ->where(function ($query) use ($where) {
-                if (isset($where['keyWords'])) {
+                if (isset($where['keyword'])) {
                     $query->where('sys_name', 'like', '%' . $where['keyWords'] . '%');
                 }
             })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete'])
+            ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete','status as status_str','is_delete as is_delete_str'])
             ->toArray();
 
         return $result;
