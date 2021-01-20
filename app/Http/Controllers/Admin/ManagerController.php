@@ -14,8 +14,6 @@ use App\Services\Common\CodeService;
 use App\Services\Common\CommonService;
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Http\FormRequest;
-use Symfony\Component\Console\Input\Input;
 
 class ManagerController extends Controller
 {
