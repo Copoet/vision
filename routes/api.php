@@ -39,84 +39,84 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::get('menu/list', 'MenuController@menuList');
     Route::any('menu/tree', 'MenuController@menuTree');
     Route::post('menu/create', 'MenuController@createMenu');
-    Route::post('menu/update', 'MenuController@updateMenu');
-    Route::delete('menu/delete', 'MenuController@delMenu');
+    Route::put('menu/update/{id}', 'MenuController@updateMenu');
+    Route::delete('menu/delete/{id}', 'MenuController@delMenu');
     Route::any('menu/side_menu', 'MenuController@sideMenu');
 
 
     Route::get('system/list', 'SystemController@systemList');
     Route::post('system/create', 'SystemController@createSystem');
-    Route::post('system/update', 'SystemController@updateSystem');
-    Route::delete('system/delete', 'SystemController@delSystem');
+    Route::put('system/update/{id}', 'SystemController@updateSystem');
+    Route::delete('system/delete/{id}', 'SystemController@delSystem');
 
     Route::get('nav/list', 'NavigationController@navigationList');
     Route::post('nav/create', 'NavigationController@createNavigation');
-    Route::post('nav/update', 'NavigationController@updateNavigation');
-    Route::delete('nav/delete', 'NavigationController@delNavigation');
+    Route::put('nav/update/{id}', 'NavigationController@updateNavigation');
+    Route::delete('nav/delete/{id}', 'NavigationController@delNavigation');
 
     Route::get('slide/list', 'SlideShowController@slideList');
     Route::post('slide/create', 'SlideShowController@createSlide');
-    Route::post('slide/update', 'SlideShowController@updateSlide');
-    Route::delete('slide/delete', 'SlideShowController@delSlide');
+    Route::put('slide/update/{id}', 'SlideShowController@updateSlide');
+    Route::delete('slide/delete/{id}', 'SlideShowController@delSlide');
 
 
     Route::get('user/list', 'UserController@userList');
     Route::post('user/create', 'UserController@createUser');
-    Route::post('user/update', 'UserController@updateUser');
-    Route::delete('user/delete', 'UserController@delUser');
+    Route::put('user/update/{id}', 'UserController@updateUser');
+    Route::delete('user/delete/{id}', 'UserController@delUser');
 
 
     Route::get('stock/list', 'StockController@userList');
     Route::post('stock/create', 'StockController@createUser');
-    Route::put('stock/update', 'StockController@updateUser');
-    Route::delete('stock/delete', 'StockController@delUser');
+    Route::put('stock/update/{id}', 'StockController@updateUser');
+    Route::delete('stock/delete/{id}', 'StockController@delUser');
 
     Route::get('article/list', 'ArticleController@articleList');
     Route::post('article/create', 'ArticleController@createArticle');
-    Route::post('article/update', 'ArticleController@updateArticle');
-    Route::delete('article/delete', 'ArticleController@delArticle');
+    Route::put('article/update/{id}', 'ArticleController@updateArticle');
+    Route::delete('article/delete/{id}', 'ArticleController@delArticle');
 
     Route::get('article/sort/list', 'ArticleSortController@articleSortList');
     Route::post('article/sort/create', 'ArticleSortController@createArticleSort');
-    Route::put('article/sort//update', 'ArticleSortController@updateArticleSort');
-    Route::delete('article/sort/delete', 'ArticleSortController@delArticleSort');
+    Route::put('article/sort//update/{id}', 'ArticleSortController@updateArticleSort');
+    Route::delete('article/sort/delete/{id}', 'ArticleSortController@delArticleSort');
     Route::get('article/sort/tree', 'ArticleSortController@getSortTree');
 
     Route::get('email/list', 'EmailController@emailList');
     Route::post('email/create', 'EmailController@createEmail');
-    Route::put('email/update', 'EmailController@updateEmail');
-    Route::delete('email/delete', 'EmailController@delEmail');
+    Route::put('email/update/{id}', 'EmailController@updateEmail');
+    Route::delete('email/delete/{id}', 'EmailController@delEmail');
 
     Route::get('email_log/list', 'EmailLogController@emailLogList');
     Route::post('email_log/create', 'EmailLogController@createEmailLog');
-    Route::put('email_log/update', 'EmailLogController@updateEmailLog');
-    Route::delete('email_log/delete', 'EmailLogController@delEmailLog');
+    Route::put('email_log/update/{id}', 'EmailLogController@updateEmailLog');
+    Route::delete('email_log/delete/{id}', 'EmailLogController@delEmailLog');
 
     Route::get('email_template/list', 'EmailTemplateController@templateList');
     Route::post('email_template/create', 'EmailTemplateController@createTemplate');
-    Route::put('email_template/update', 'EmailTemplateController@updateTemplate');
-    Route::delete('email_template/delete', 'EmailTemplateController@delTemplate');
+    Route::put('email_template/update/{id}', 'EmailTemplateController@updateTemplate');
+    Route::delete('email_template/delete/{id}', 'EmailTemplateController@delTemplate');
 
 
     Route::get('auth_rule/list', 'AuthRuleController@list');
     Route::post('auth_rule/create', 'AuthRuleController@create');
-    Route::put('auth_rule/update', 'AuthRuleController@update');
-    Route::delete('auth_rule/delete', 'AuthRuleController@delete');
+    Route::put('auth_rule/update/{id}', 'AuthRuleController@update');
+    Route::delete('auth_rule/delete/{id}', 'AuthRuleController@delete');
 
     Route::get('auth_group_access/list', 'AuthGroupAccessController@list');
     Route::post('auth_group_access/create', 'AuthGroupAccessController@create');
-    Route::put('auth_group_access/update', 'AuthGroupAccessController@update');
-    Route::delete('auth_group_access/delete', 'AuthGroupAccessController@delete');
+    Route::put('auth_group_access/update/{id}', 'AuthGroupAccessController@update');
+    Route::delete('auth_group_access/delete/{id}', 'AuthGroupAccessController@delete');
 
     Route::get('auth_role_rule/list', 'AuthRoleRuleController@list');
     Route::post('auth_role_rule/create', 'AuthRoleRuleController@create');
-    Route::put('auth_role_rule/update', 'AuthRoleRuleController@update');
-    Route::delete('auth_role_rule/delete', 'AuthRoleRuleController@delete');
+    Route::put('auth_role_rule/update/{id}', 'AuthRoleRuleController@update');
+    Route::delete('auth_role_rule/delete/{id}', 'AuthRoleRuleController@delete');
 
     Route::get('auth_manager/list', 'AuthManagerGroupController@list');
     Route::post('auth_manager/create', 'AuthManagerGroupController@create');
-    Route::put('auth_manager/update', 'AuthManagerGroupController@update');
-    Route::delete('auth_manager/delete', 'AuthManagerGroupController@delete');
+    Route::put('auth_manager/update/{id}', 'AuthManagerGroupController@update');
+    Route::delete('auth_manager/delete/{id}', 'AuthManagerGroupController@delete');
 
 
 });
