@@ -69,7 +69,7 @@ class ManagerController extends Controller
     {
 
         $userName = $request->input('name');
-        $passWord = $request->input('pass_word');
+        $passWord = $request->input('password');
         $status   = $request->input('status');
 
         if (empty($userName) || empty($passWord) || empty($status)) {
@@ -120,7 +120,6 @@ class ManagerController extends Controller
         }
 
         $managerInfo = $this->managerService->getManagerInfo($userName);
-
         if ($managerInfo && $id !== $managerInfo['id']) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);

@@ -88,19 +88,18 @@ class NavigationController extends Controller
 
     }
 
-
     /**
      * 导航栏更新
+     * @param int $id
      * @param Request $request
      */
-    public function updateNavigation(Request $request)
+    public function updateNavigation(int $id,Request $request)
     {
         $name     = $request->input('name');
         $parentId = $request->input('parent_id');
         $url      = $request->input('url');
         $status   = $request->input('status');
         $path     = $request->input('path');
-        $id       = $request->input('id');
 
         if (empty($name) || empty($url) || empty($status)) {
 
@@ -129,16 +128,12 @@ class NavigationController extends Controller
 
     }
 
-
     /**
      * 导航栏删除
-     * @param Request $request
+     * @param $id
      */
-    public function delNavigation(Request $request)
+    public function delNavigation($id)
     {
-
-        $id = $request->input('id');
-
         if (empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);

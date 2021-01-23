@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Common\CodeService;
-use App\Services\EmailTemplateService;
+use App\Services\EmailService;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
@@ -14,7 +14,7 @@ class EmailController extends Controller
     protected $service;
 
 
-    public function __construct(EmailTemplateService $service)
+    public function __construct(EmailService $service)
     {
         $this->service = $service;
     }
@@ -30,7 +30,7 @@ class EmailController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->service->getList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->service->getList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
 
@@ -57,7 +57,7 @@ class EmailController extends Controller
         $is_default = $request->input('id_default');
 
 
-        if (empty($name) || empty($content) || empty($status)) {
+        if (empty($name) || empty($password) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -81,10 +81,10 @@ class EmailController extends Controller
 
 
     /**
-     * updateEmail
+     * @param int $id
      * @param Request $request
      */
-    public function updateEmail(Request $request)
+    public function updateEmail(int $id, Request $request)
     {
         $name       = $request->input('username');
         $smtp       = $request->input('smtp');
@@ -92,9 +92,8 @@ class EmailController extends Controller
         $status     = $request->input('status');
         $port       = $request->input('port');
         $is_default = $request->input('id_default');
-        $id         = $request->input('id');
 
-        if (empty($name) || empty($content) || empty($status)) {
+        if (empty($name) || empty($password) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -117,15 +116,13 @@ class EmailController extends Controller
 
     }
 
+
     /**
      * delEmail
-     * @param Request $request
-     *
+     * @param int $id
      */
-    public function delEmail(Request $request)
+    public function delEmail(int $id)
     {
-        $id = $request->input('id');
-
         if (empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);

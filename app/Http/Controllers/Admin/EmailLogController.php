@@ -43,14 +43,12 @@ class EmailLogController extends Controller
 
 
 
+
     /**
-     *
-     * @param Request $request
-     *
+     * @param int $id
      */
-    public function delEmailLog(Request $request)
+    public function delEmailLog(int $id)
     {
-        $id = $request->input('id');
 
         if (empty($id)) {
 

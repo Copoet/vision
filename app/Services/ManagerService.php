@@ -26,7 +26,7 @@ class ManagerService
         $result = Manager::query()
             ->where('name', $name)
             ->where('status', 1)
-            ->first(['uuid', 'status', 'password', 'remember_token']);
+            ->first(['id','uuid', 'status', 'password', 'remember_token']);
 
         return $result;
     }
@@ -137,6 +137,6 @@ class ManagerService
      */
     public function delManager($where)
     {
-        return Manager::query()->where($where)->update(['status' => 1]);
+        return Manager::query()->where($where)->update(['is_delete' => 1]);
     }
 }

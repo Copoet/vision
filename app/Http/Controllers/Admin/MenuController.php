@@ -39,7 +39,7 @@ class MenuController extends Controller
     {
 
         $page     = $request->input('page') ? $request->input('page') : 1;
-        $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
+        $pageSize = $request->input('page_size') ? $request->input('page_size') : 50;
         $param    = $request->all();
 
         $list = $this->menuService->getMenuList($param, ['*','status as status_str','is_delete as is_delete_str'],$page, $pageSize);
@@ -124,19 +124,20 @@ class MenuController extends Controller
 
     /**
      * 菜单更新
+     * @param int $id
      * @param Request $request
      * @author copoet
      * @mail copoet@126.com
      * Date: 2020/8/26/10:43 AM
+     *
      */
-    public function updateMenu(Request $request)
+    public function updateMenu(int $id,Request $request)
     {
         $name     = $request->input('name');
         $parentId = $request->input('parent_id');
         $url      = $request->input('url');
         $status   = $request->input('status');
         $icon     = $request->input('icon');
-        $id       = $request->input('id');
 
         if (empty($id) || empty($name) || empty($url) || empty($status)) {
 
@@ -171,20 +172,13 @@ class MenuController extends Controller
 
     /**
      * 菜单删除
-     * @param Request $request
+     * @param int $id
      * @author copoet
      * @mail copoet@126.com
      * Date: 2020/8/26/10:47 AM
      */
-    public function delMenu(Request $request)
+    public function delMenu(int $id)
     {
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
-
         $result = $this->menuService->delMenu(['id' => $id]);
 
         if ($result) {
