@@ -137,6 +137,6 @@ class ManagerService
      */
     public function delManager($where)
     {
-        return Manager::query()->where($where)->update(['status' => 1]);
+        return Manager::query()->where($where)->update(['is_delete' => 1]);
     }
 }
