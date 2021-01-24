@@ -74,12 +74,12 @@ class AuthGroupAccessController extends Controller
 
     /**
      * 更新操作
+     * @param int $id
      * @param Request $request
      */
-    public function update(Request $request)
+    public function update(int $id,Request $request)
     {
 
-        $id      = $request->input('id');
         $uid     = $request->input('uid');
         $groupId = $request->input('group_id');
 
@@ -105,17 +105,11 @@ class AuthGroupAccessController extends Controller
 
     /**
      * 删除操作
-     * @param Request $request
+     * @param int $id
      */
-    public function delete(Request $request)
+    public function delete(int $id)
     {
 
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
         $result = $this->authGroupAccess->del(['id' => $id]);
 
         if ($result) {
