@@ -89,7 +89,7 @@ class ArticleSortController extends Controller
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
 
-        if (empty($name) || empty($url) || empty($status)) {
+        if (empty($name)  || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
