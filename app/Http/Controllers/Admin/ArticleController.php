@@ -86,9 +86,10 @@ class ArticleController extends Controller
 
     /**
      * 更新文章
+     * @param int $id
      * @param Request $request
      */
-    public function updateArticle(Request $request)
+    public function updateArticle(int $id,Request $request)
     {
         $name        = $request->input('title');
         $sortId      = $request->input('sort_id');
@@ -98,9 +99,8 @@ class ArticleController extends Controller
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
         $flag        = $request->input('flag');
-        $id          = $request->input('id');
 
-        if (empty($id) || empty($name) || empty($url) || empty($status)) {
+        if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -126,18 +126,11 @@ class ArticleController extends Controller
 
     /**
      * 删除文章
-     * @param Request $request
+     * @param int $id
      *
      */
-    public function delArticle(Request $request)
+    public function delArticle(int $id)
     {
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
-
         $result = $this->articleService->del(['id' => $id]);
 
         if ($result) {

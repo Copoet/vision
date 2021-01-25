@@ -83,7 +83,7 @@ class ArticleService
     public function del($where)
     {
 
-        return Article::query()->where($where)->update(['status' => 2]);
+        return Article::query()->where($where)->update(['is_delete' => 1]);
 
     }
 

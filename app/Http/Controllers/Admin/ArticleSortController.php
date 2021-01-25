@@ -49,9 +49,6 @@ class ArticleSortController extends Controller
      */
     public function createArticleSort(Request $request)
     {
-//        $param = $request->all();
-//        var_dump($param);
-//        exit;
         $name        = $request->input('sort_name');
         $sortId      = $request->input('parent_id');
         $status      = $request->input('status');
