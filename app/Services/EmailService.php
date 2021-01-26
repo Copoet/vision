@@ -82,7 +82,7 @@ class EmailService
     public function del($where)
     {
 
-        return Email::query()->where($where)->update(['status' => 2]);
+        return Email::query()->where($where)->update(['is_delete' => 1]);
 
     }
 

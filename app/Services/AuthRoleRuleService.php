@@ -83,7 +83,7 @@ class AuthRoleRuleService
     public function del($where)
     {
 
-        return AuthRoleRule::query()->where($where)->update(['status' => 2]);
+        return AuthRoleRule::query()->where($where)->update(['id_delete' => 2]);
 
     }
 

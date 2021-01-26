@@ -83,7 +83,7 @@ class AuthGroupAccessService
     public function del($where)
     {
 
-        return AuthGroupAccess::query()->where($where)->update(['id_delete' => 2]);
+        return AuthGroupAccess::query()->where($where)->update(['id_delete' => 1]);
 
     }
 

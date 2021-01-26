@@ -15,6 +15,7 @@ class EmailLog extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['status','subject','email','content','ip','is_delete'];
 
     const CREATED_AT = 'create_time';
 
