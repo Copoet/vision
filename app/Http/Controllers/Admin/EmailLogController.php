@@ -50,11 +50,6 @@ class EmailLogController extends Controller
     public function delEmailLog(int $id)
     {
 
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
-
         $result = $this->service->del(['id' => $id]);
 
         if ($result) {

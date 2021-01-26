@@ -75,13 +75,13 @@ class EmailTemplateController extends Controller
     /**
      * 更新
      * @param Request $request
+     * @param int $id
      */
-    public function updateTemplate(Request $request)
+    public function updateTemplate(int $id,Request $request)
     {
         $name    = $request->input('title');
         $status  = $request->input('status');
         $content = $request->input('content');
-        $id      = $request->input('id');
         if (empty($name) || empty($content) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
@@ -109,12 +109,6 @@ class EmailTemplateController extends Controller
      */
     public function delTemplate(Request $request)
     {
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
 
         $result = $this->service->del(['id' => $id]);
 

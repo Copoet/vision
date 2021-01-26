@@ -123,11 +123,6 @@ class EmailController extends Controller
      */
     public function delEmail(int $id)
     {
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
-
         $result = $this->service->del(['id' => $id]);
 
         if ($result) {
