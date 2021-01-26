@@ -14,7 +14,7 @@ class Email extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['username'];
+    protected $fillable = ['username','smtp','status','password','fromname','fromemail','port','is_delete'];
 
     const CREATED_AT = 'create_time';
 
