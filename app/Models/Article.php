@@ -15,7 +15,7 @@ class Article extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title','titlepic','content','flag','keywords','description','views'];
 
     const CREATED_AT = 'create_time';
 

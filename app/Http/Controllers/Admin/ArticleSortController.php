@@ -30,7 +30,7 @@ class ArticleSortController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->sortService->getSortList($param, '*,status as status_str,is_delete as is_delete_str', $page, $pageSize);
+        $list = $this->sortService->getSortList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
 
@@ -55,7 +55,7 @@ class ArticleSortController extends Controller
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
 
-        if (empty($name) || empty($content) || empty($status)) {
+        if (empty($name)  || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -78,18 +78,18 @@ class ArticleSortController extends Controller
 
     /**
      * 更新文章分类
+     * @param  int $id
      * @param Request $request
      */
-    public function updateArticleSort(Request $request)
+    public function updateArticleSort(int $id,Request $request)
     {
         $name        = $request->input('sort_name');
         $sortId      = $request->input('parent_id');
         $status      = $request->input('status');
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
-        $id          = $request->input('id');
 
-        if (empty($id) || empty($name) || empty($url) || empty($status)) {
+        if (empty($name)  || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -112,17 +112,11 @@ class ArticleSortController extends Controller
 
     /**
      * 删除分类
-     * @param Request $request
+     * @param int $id
      *
      */
-    public function delArticleSort(Request $request)
+    public function delArticleSort(int $id)
     {
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
 
         $result = $this->sortService->del(['id' => $id]);
 

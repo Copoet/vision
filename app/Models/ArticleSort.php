@@ -14,6 +14,7 @@ class ArticleSort extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['sort_name','keywords','description'];
 
     const CREATED_AT = 'create_time';
 

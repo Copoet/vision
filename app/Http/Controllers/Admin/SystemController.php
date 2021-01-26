@@ -98,22 +98,22 @@ class SystemController extends Controller
     /**
      * 更新系统参数
      * @param Request $request
+     * @param int $id
      * @author copoet
      * @mail copoet@126.com
      * Date: 2020/8/26/11:13 AM
      */
-    public function updateSystem(Request $request)
+    public function updateSystem(int $id,Request $request)
     {
         $sysName    = $request->input('sys_name');
         $sysValue   = $request->input('sys_value');
         $sysExplain = $request->input('sys_explain');
         $sysType    = $request->input('sys_type');
         $status     = $request->input('status');
-        $id         = $request->input('id');
 
-        if (empty($id) || empty($sysName) || empty($sysValue) || empty($sysExplain) || empty($sysType)) {
+        if (empty($sysName) || empty($sysValue) || empty($sysExplain) || empty($sysType)) {
 
-            $this->returnFail(CodeService::PUBLIC_ERROR);
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
         $checkResult = $this->systemService->getSystem(['sys_name' => $sysValue]);
@@ -141,21 +141,13 @@ class SystemController extends Controller
 
     /**
      * 删除系统参数
-     * @param Request $request
+     * @param it $id
      * @author copoet
      * @mail copoet@126.com
      * Date: 2020/8/26/11:15 AM
      */
-    public function delSystem(Request $request)
+    public function delSystem(int $id)
     {
-
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
-
         $result = $this->systemService->delSystem(['id' => $id]);
 
         if ($result) {

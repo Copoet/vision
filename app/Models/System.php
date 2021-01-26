@@ -14,7 +14,7 @@ class System extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['sys_name'];
+    protected $fillable = ['sys_name','sys_value','sys_explain','sys_type','status'];
 
     const CREATED_AT = 'create_time';
 
