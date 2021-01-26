@@ -82,7 +82,7 @@ class EmailLogService
     public function del($where)
     {
 
-        return EmailLog::query()->where($where)->update(['id_delete' => 1]);
+        return EmailLog::query()->where($where)->update(['is_delete' => 1]);
 
     }
 
