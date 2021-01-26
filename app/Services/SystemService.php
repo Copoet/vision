@@ -113,6 +113,6 @@ class SystemService
     public function delSystem($where)
     {
 
-        return System::query()->where($where)->update(['status' => 1]);
+        return System::query()->where($where)->update(['id_delete' => 1]);
     }
 }

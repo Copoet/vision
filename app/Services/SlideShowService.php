@@ -94,7 +94,7 @@ class SlideShowService
     public function delSlide($where)
     {
 
-        return SlideShow::query()->where($where)->update(['status' => 2]);
+        return SlideShow::query()->where($where)->update(['id_delete' => 1]);
 
     }
 

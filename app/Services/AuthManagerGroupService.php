@@ -83,7 +83,7 @@ class AuthManagerGroupService
     public function del($where)
     {
 
-        return AuthManagerGroup::query()->where($where)->update(['status' => 2]);
+        return AuthManagerGroup::query()->where($where)->update(['id_delete' => 2]);
 
     }
 

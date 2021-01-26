@@ -90,7 +90,7 @@ class ArticleSortService
     public function del($where)
     {
 
-        return ArticleSort::query()->where($where)->update(['is_delete' => 2]);
+        return ArticleSort::query()->where($where)->update(['is_delete' => 1]);
 
     }
 
