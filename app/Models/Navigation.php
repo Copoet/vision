@@ -20,6 +20,7 @@ class Navigation extends Model
 
     const UPDATED_AT = 'update_time';
 
+    protected $fillable = ['status','name','url','parent_id','path','is_delete'];
 
     public function getStatusStrAttribute($value)
     {

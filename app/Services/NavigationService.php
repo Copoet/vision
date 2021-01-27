@@ -92,7 +92,7 @@ class NavigationService
     public function delNavigation($where)
     {
 
-        return Navigation::query()->where($where)->update(['id_delete' => 1]);
+        return Navigation::query()->where($where)->update(['is_delete' => 1]);
 
     }
 
