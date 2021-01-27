@@ -82,7 +82,7 @@ class EmailTemplateService
     public function del($where)
     {
 
-        return EmailTemplate::query()->where($where)->update(['id_delete' => 1]);
+        return EmailTemplate::query()->where($where)->update(['is_delete' => 1]);
 
     }
 
