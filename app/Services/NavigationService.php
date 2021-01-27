@@ -27,7 +27,7 @@ class NavigationService
     {
 
         return Navigation::query()->where($where)
-            ->get(['id', 'name', 'url', 'parent_id', 'path', 'addtime', 'update_time', 'status', 'is_delete'])
+            ->get(['id', 'name', 'url', 'parent_id', 'path', 'create_time', 'update_time', 'status', 'is_delete'])
             ->toArray();
 
     }
