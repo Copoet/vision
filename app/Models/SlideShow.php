@@ -7,7 +7,6 @@ use App\Enum\SystemEnum;
 
 class SlideShow extends Model
 {
-    //
 
     protected $table = 'slideshow';
 
