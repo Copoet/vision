@@ -65,7 +65,7 @@ class SlideShowService
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
-        })->where()->count();
+        })->count();
 
         $offset = ($page - 1) * $pageSize;
 
@@ -94,7 +94,7 @@ class SlideShowService
     public function delSlide($where)
     {
 
-        return SlideShow::query()->where($where)->update(['id_delete' => 1]);
+        return SlideShow::query()->where($where)->update(['is_delete' => 1]);
 
     }
 

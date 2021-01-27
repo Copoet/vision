@@ -19,6 +19,7 @@ class SlideShow extends Model
 
     const UPDATED_AT = 'update_time';
 
+    protected $fillable = ['sort_id','name','url','pic','remark','status','is_delete'];
 
     public function getStatusStrAttribute($value)
     {
