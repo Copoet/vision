@@ -56,7 +56,6 @@ class SlideShowController extends Controller
     {
 
         $name    = $request->input('name');
-        $sortId  = $request->input('sort_id');
         $url     = $request->input('url');
         $status  = $request->input('status');
         $pic     = $request->input('pic');
@@ -75,7 +74,6 @@ class SlideShowController extends Controller
         }
 
         $data['name']    = $name;
-        $data['sort_id'] = $sortId;
         $data['url']     = $url;
         $data['status']  = $status;
         $data['pic']     = $pic;
@@ -102,7 +100,6 @@ class SlideShowController extends Controller
     public function updateSlide(int $id,Request $request)
     {
         $name    = $request->input('name');
-        $sortId  = $request->input('sort_id');
         $url     = $request->input('url');
         $status  = $request->input('status');
         $pic     = $request->input('pic');
@@ -121,7 +118,6 @@ class SlideShowController extends Controller
         }
 
         $data['name']    = $name;
-        $data['sort_id'] = $sortId;
         $data['url']     = $url;
         $data['status']  = $status;
         $data['pic']     = $pic;
