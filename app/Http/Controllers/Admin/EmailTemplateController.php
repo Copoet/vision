@@ -30,7 +30,7 @@ class EmailTemplateController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->service->getArticleList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->service->getList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
 
@@ -104,10 +104,10 @@ class EmailTemplateController extends Controller
 
     /**
      * 删除
-     * @param Request $request
+     * @param int $id
      *
      */
-    public function delTemplate(Request $request)
+    public function delTemplate(int $id)
     {
 
         $result = $this->service->del(['id' => $id]);

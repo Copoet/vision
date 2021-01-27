@@ -19,7 +19,7 @@ class EmailTemplate extends Model
 
     const UPDATED_AT = 'update_time';
 
-
+    protected $fillable = ['status','title','content',];
     public function getStatusStrAttribute($value)
     {
 

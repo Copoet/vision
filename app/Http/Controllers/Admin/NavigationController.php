@@ -130,9 +130,9 @@ class NavigationController extends Controller
 
     /**
      * 导航栏删除
-     * @param $id
+     * @param int $id
      */
-    public function delNavigation($id)
+    public function delNavigation(int $id)
     {
         if (empty($id)) {
 

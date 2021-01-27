@@ -96,9 +96,10 @@ class SlideShowController extends Controller
 
     /**
      * 轮播修改
+     * @param int $id
      * @param Request $request
      */
-    public function updateSlide(Request $request)
+    public function updateSlide(int $id,Request $request)
     {
         $name    = $request->input('name');
         $sortId  = $request->input('sort_id');
@@ -107,7 +108,6 @@ class SlideShowController extends Controller
         $pic     = $request->input('pic');
         $remark  = $request->input('remark');
         $myorder = $request->input('myorder');
-        $id       = $request->input('id');
 
         if (empty($name) || empty($url) || empty($status)) {
 
@@ -141,17 +141,10 @@ class SlideShowController extends Controller
 
     /**
      * 轮播删除
-     * @param Request $request
+     * @param int $id
      */
-    public function delSlide(Request $request)
+    public function delSlide(int $id)
     {
-
-        $id = $request->input('id');
-
-        if (empty($id)) {
-
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
 
         $result = $this->slideService->delSlide(['id' => $id]);
 
