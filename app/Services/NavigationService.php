@@ -61,7 +61,7 @@ class NavigationService
 
         $result['total'] = Navigation::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 
@@ -69,7 +69,7 @@ class NavigationService
 
         $result['list'] = Navigation::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

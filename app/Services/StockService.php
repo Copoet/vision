@@ -32,7 +32,7 @@ class StockService
         $result['total'] = Stock::query()
             ->where(function ($query) use ($where) {
                 if (isset($param['keyword'])) {
-                    $query->where('stock_name', 'like', '%' . $where['keyWords'] . '%');
+                    $query->where('stock_name', 'like', '%' . $where['keyword'] . '%');
                 }
             })->count();
 
@@ -40,7 +40,7 @@ class StockService
 
         $result['list'] = Stock::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('stock_name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('stock_name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

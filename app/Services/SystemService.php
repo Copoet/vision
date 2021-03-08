@@ -49,7 +49,7 @@ class SystemService
 
         $result['total'] = System::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('sys_name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('sys_name', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 
@@ -58,7 +58,7 @@ class SystemService
         $result['list'] = System::query()
             ->where(function ($query) use ($where) {
                 if (isset($where['keyword'])) {
-                    $query->where('sys_name', 'like', '%' . $where['keyWords'] . '%');
+                    $query->where('sys_name', 'like', '%' . $where['keyword'] . '%');
                 }
             })
             ->offset($offset)
