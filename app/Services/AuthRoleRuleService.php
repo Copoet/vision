@@ -42,7 +42,7 @@ class AuthRoleRuleService
 
         $result['total'] = AuthRoleRule::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 
@@ -50,7 +50,7 @@ class AuthRoleRuleService
 
         $result['list'] = AuthRoleRule::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

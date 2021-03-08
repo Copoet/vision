@@ -49,7 +49,7 @@ class MenuService
         $result['total'] = Menu::query()
             ->where(function ($query) use ($where) {
                 if (isset($param['keyword'])) {
-                    $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                    $query->where('name', 'like', '%' . $where['keyword'] . '%');
                 }
             })->count();
 
@@ -57,7 +57,7 @@ class MenuService
 
         $result['list'] = Menu::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

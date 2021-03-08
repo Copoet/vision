@@ -41,7 +41,7 @@ class ArticleSortService
 
         $result['total'] = ArticleSort::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('sort_name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('sort_name', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 
@@ -49,7 +49,7 @@ class ArticleSortService
 
         $result['list'] = ArticleSort::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('sort_name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('sort_name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

@@ -42,7 +42,7 @@ class AuthGroupAccessService
 
         $result['total'] = AuthGroupAccess::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 

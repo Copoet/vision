@@ -41,7 +41,7 @@ class EmailService
 
         $result['total'] = Email::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('title', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('title', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 
@@ -49,7 +49,7 @@ class EmailService
 
         $result['list'] = Email::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('title', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('title', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

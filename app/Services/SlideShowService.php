@@ -63,7 +63,7 @@ class SlideShowService
 
         $result['total'] = SlideShow::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })->count();
 
@@ -71,7 +71,7 @@ class SlideShowService
 
         $result['list'] = SlideShow::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)
