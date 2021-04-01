@@ -78,6 +78,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::delete('article/delete/{id}', 'ArticleController@delArticle');
 
     Route::get('article/sort/list', 'ArticleSortController@articleSortList');
+    Route::get('article/sort/info', 'ArticleSortController@articleSortInfo');
     Route::post('article/sort/create', 'ArticleSortController@createArticleSort');
     Route::put('article/sort//update/{id}', 'ArticleSortController@updateArticleSort');
     Route::delete('article/sort/delete/{id}', 'ArticleSortController@delArticleSort');

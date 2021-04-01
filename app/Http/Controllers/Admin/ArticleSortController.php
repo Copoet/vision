@@ -30,13 +30,35 @@ class ArticleSortController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->sortService->getSortList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->sortService->getSortList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
 
             $this->returnSuccess($list, CodeService::PUBLIC_SUCCESS);
 
         } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
+
+    /**
+     * 获取文章详情
+     * @param Request $request
+     */
+    public function articleSortInfo(Request $request)
+    {
+        $id = $request->input('id');
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->sortService->getArticleSort(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
     }
@@ -55,7 +77,7 @@ class ArticleSortController extends Controller
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
 
-        if (empty($name)  || empty($status)) {
+        if (empty($name) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
@@ -78,10 +100,10 @@ class ArticleSortController extends Controller
 
     /**
      * 更新文章分类
-     * @param  int $id
+     * @param int $id
      * @param Request $request
      */
-    public function updateArticleSort(int $id,Request $request)
+    public function updateArticleSort(int $id, Request $request)
     {
         $name        = $request->input('sort_name');
         $sortId      = $request->input('parent_id');
@@ -89,7 +111,7 @@ class ArticleSortController extends Controller
         $keywords    = $request->input('keywords');
         $description = $request->input('description');
 
-        if (empty($name)  || empty($status)) {
+        if (empty($name) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
