@@ -32,7 +32,7 @@ class ArticleController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->articleService->getArticleList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->articleService->getArticleList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
 
@@ -43,6 +43,28 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * 获取文章详情
+     * @param Request $request
+     */
+    public function articleInfo(Request $request)
+    {
+        $id = $request->input('id');
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->articleService->getArticleInfo(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+    }
 
     /**
      * 新增文章
@@ -89,7 +111,7 @@ class ArticleController extends Controller
      * @param int $id
      * @param Request $request
      */
-    public function updateArticle(int $id,Request $request)
+    public function updateArticle(int $id, Request $request)
     {
         $name        = $request->input('title');
         $sortId      = $request->input('sort_id');
