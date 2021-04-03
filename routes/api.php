@@ -88,6 +88,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::get('article/sort/tree', 'ArticleSortController@getSortTree');
 
     Route::get('email/list', 'EmailController@emailList');
+    Route::get('email/info', 'EmailController@emailInfo');
     Route::post('email/create', 'EmailController@createEmail');
     Route::put('email/update/{id}', 'EmailController@updateEmail');
     Route::delete('email/delete/{id}', 'EmailController@delEmail');
@@ -98,6 +99,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::delete('email_log/delete/{id}', 'EmailLogController@delEmailLog');
 
     Route::get('email_template/list', 'EmailTemplateController@templateList');
+    Route::get('email_template/info', 'EmailTemplateController@templateInfo');
     Route::post('email_template/create', 'EmailTemplateController@createTemplate');
     Route::put('email_template/update/{id}', 'EmailTemplateController@updateTemplate');
     Route::delete('email_template/delete/{id}', 'EmailTemplateController@delTemplate');
