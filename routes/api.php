@@ -32,11 +32,13 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
 
 
     Route::get('manager/list', 'ManagerController@managerList');
+    Route::get('manager/info', 'ManagerController@managerInfo');
     Route::post('manager/create', 'ManagerController@createManager');
     Route::put('manager/update/{id}', 'ManagerController@updateManager');
     Route::delete('manager/delete/{id}' ,'ManagerController@delManager');
 
     Route::get('menu/list', 'MenuController@menuList');
+    Route::get('menu/info', 'MenuController@menuInfo');
     Route::any('menu/tree', 'MenuController@menuTree');
     Route::post('menu/create', 'MenuController@createMenu');
     Route::put('menu/update/{id}', 'MenuController@updateMenu');
@@ -45,6 +47,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
 
 
     Route::get('system/list', 'SystemController@systemList');
+    Route::get('system/info', 'SystemController@systemInfo');
     Route::post('system/create', 'SystemController@createSystem');
     Route::put('system/update/{id}', 'SystemController@updateSystem');
     Route::delete('system/delete/{id}', 'SystemController@delSystem');
@@ -72,11 +75,13 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::delete('stock/delete/{id}', 'StockController@delUser');
 
     Route::get('article/list', 'ArticleController@articleList');
+    Route::get('article/info', 'ArticleController@articleInfo');
     Route::post('article/create', 'ArticleController@createArticle');
     Route::put('article/update/{id}', 'ArticleController@updateArticle');
     Route::delete('article/delete/{id}', 'ArticleController@delArticle');
 
     Route::get('article/sort/list', 'ArticleSortController@articleSortList');
+    Route::get('article/sort/info', 'ArticleSortController@articleSortInfo');
     Route::post('article/sort/create', 'ArticleSortController@createArticleSort');
     Route::put('article/sort//update/{id}', 'ArticleSortController@updateArticleSort');
     Route::delete('article/sort/delete/{id}', 'ArticleSortController@delArticleSort');

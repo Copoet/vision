@@ -50,6 +50,28 @@ class SystemController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     */
+    public function systemInfo(Request $request){
+
+        $id = $request->input('id');
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->systemService->getSystem(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+
+    }
 
     /**
      * 添加系统参数

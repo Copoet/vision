@@ -54,6 +54,29 @@ class MenuController extends Controller
 
     }
 
+    /**
+     * 获取菜单信息
+     * @param Request $request
+     */
+    public function menuInfo(Request $request){
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->menuService->getMenuInfo(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+
+
+    }
 
     /**
      * 获取树形结构菜单
