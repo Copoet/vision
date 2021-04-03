@@ -15,22 +15,19 @@ class ManagerService
 
     /**
      * 获取管理员信息
-     * @param $name
+     * @param $where
+     * @param $columns
      * @return array
      * @author copoet
      * @mail copoet@126.com
      * Date: 2020/8/13/1:11 PM
      */
-    public function getManagerInfo($name)
+
+
+    public function getManagerInfo($where, $columns = ['*'])
     {
-        $result = Manager::query()
-            ->where('name', $name)
-            ->where('status', 1)
-            ->first(['id','uuid', 'status', 'password', 'remember_token']);
-
-        return $result;
+        return Manager::query()->where($where)->get($columns)->toArray();
     }
-
 
     /**
      * 更新操作
@@ -79,17 +76,17 @@ class ManagerService
      * @mail copoet@126.com
      * Date: 2020/8/24/4:51 PM
      */
-    public function getManagerList($where, $page, $pageSize, $columns = ['*','status as status_str','is_delete as is_delete_str'])
+    public function getManagerList($where, $page, $pageSize, $columns = ['*', 'status as status_str', 'is_delete as is_delete_str'])
     {
 
         $where['is_delete'] = 2;
-        $result['total'] = Manager::query()
+        $result['total']    = Manager::query()
             ->where(function ($query) use ($where) {
                 if (isset($where['keyword'])) {
                     $query->where('name', 'like', '%' . $where['keyword'] . '%');
                 }
                 if (isset($where['is_delete'])) {
-                    $query->where('is_delete',$where['is_delete']);
+                    $query->where('is_delete', $where['is_delete']);
                 }
             })->count();
 
@@ -100,7 +97,7 @@ class ManagerService
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
             if (isset($where['is_delete'])) {
-                $query->where('is_delete',$where['is_delete']);
+                $query->where('is_delete', $where['is_delete']);
             }
         })
             ->offset($offset)

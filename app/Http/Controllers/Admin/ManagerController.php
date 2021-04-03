@@ -43,7 +43,7 @@ class ManagerController extends Controller
 
         $param = $request->all();
 
-        $list = $this->managerService->getManagerList($param,$page, $pageSize);
+        $list = $this->managerService->getManagerList($param, $page, $pageSize);
 
         if ($list) {
 
@@ -54,6 +54,27 @@ class ManagerController extends Controller
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
 
+
+    }
+
+
+    public function managerInfo(Request $request)
+    {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->managerService->getManagerInfo(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
     }
 
