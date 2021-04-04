@@ -31,7 +31,7 @@ class LoginController extends Controller
         if (empty($name) || empty($password)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
-        $managerInfo = $manager->getManagerInfo($name);
+        $managerInfo = $manager->getManagerInfo(['name' => $name]);
 
         $token = auth()->attempt(['name' => $name, 'password' => $password], true);
 

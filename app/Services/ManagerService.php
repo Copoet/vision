@@ -26,7 +26,7 @@ class ManagerService
 
     public function getManagerInfo($where, $columns = ['*'])
     {
-        return Manager::query()->where($where)->get($columns)->toArray();
+        return Manager::query()->where($where)->get($columns)->first();
     }
 
     /**
