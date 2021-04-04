@@ -58,6 +58,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::delete('nav/delete/{id}', 'NavigationController@delNavigation');
 
     Route::get('slide/list', 'SlideShowController@slideList');
+    Route::get('slide/info', 'SlideShowController@slideInfo');
     Route::post('slide/create', 'SlideShowController@createSlide');
     Route::put('slide/update/{id}', 'SlideShowController@updateSlide');
     Route::delete('slide/delete/{id}', 'SlideShowController@delSlide');
