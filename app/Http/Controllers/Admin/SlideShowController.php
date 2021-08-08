@@ -37,12 +37,34 @@ class SlideShowController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->slideService->getSlideList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->slideService->getSlideList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list, CodeService::PUBLIC_SUCCESS);
 
         } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function slideInfo(Request $request)
+    {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->slideService->getSlideShow(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
     }
@@ -97,7 +119,7 @@ class SlideShowController extends Controller
      * @param int $id
      * @param Request $request
      */
-    public function updateSlide(int $id,Request $request)
+    public function updateSlide(int $id, Request $request)
     {
         $name    = $request->input('name');
         $url     = $request->input('url');
