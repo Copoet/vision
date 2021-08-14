@@ -36,12 +36,32 @@ class NavigationController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->navService->getNavigationList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->navService->getNavigationList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list, CodeService::PUBLIC_SUCCESS);
 
         } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
+
+
+    public function navigationInfo(Request $request)
+    {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->navService->getNavigation(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
     }
@@ -93,7 +113,7 @@ class NavigationController extends Controller
      * @param int $id
      * @param Request $request
      */
-    public function updateNavigation(int $id,Request $request)
+    public function updateNavigation(int $id, Request $request)
     {
         $name     = $request->input('name');
         $parentId = $request->input('parent_id');

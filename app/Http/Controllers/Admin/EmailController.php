@@ -41,6 +41,29 @@ class EmailController extends Controller
         }
     }
 
+    /**
+     * 邮箱详情
+     * @param Request $request
+     */
+    public function emailInfo(Request $request)
+    {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->service->getInfo(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
+
 
     /**
      * createEmail

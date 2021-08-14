@@ -30,7 +30,7 @@ class EmailTemplateController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->service->getList($param, ['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->service->getList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
 
@@ -41,6 +41,27 @@ class EmailTemplateController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     */
+    public function templateInfo(Request $request)
+    {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $data = $this->service->getInfo(['id' => $id]);
+
+        if ($data) {
+
+            $this->returnSuccess($data, CodeService::PUBLIC_SUCCESS);
+        } else {
+
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
 
     /**
      * 新增
@@ -77,7 +98,7 @@ class EmailTemplateController extends Controller
      * @param Request $request
      * @param int $id
      */
-    public function updateTemplate(int $id,Request $request)
+    public function updateTemplate(int $id, Request $request)
     {
         $name    = $request->input('title');
         $status  = $request->input('status');

@@ -27,15 +27,14 @@ Route::group(['namespace' => 'Admin'], function () {
 
 
 //common
-Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function () {
-
+Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function () {
 
 
     Route::get('manager/list', 'ManagerController@managerList');
     Route::get('manager/info', 'ManagerController@managerInfo');
     Route::post('manager/create', 'ManagerController@createManager');
     Route::put('manager/update/{id}', 'ManagerController@updateManager');
-    Route::delete('manager/delete/{id}' ,'ManagerController@delManager');
+    Route::delete('manager/delete/{id}', 'ManagerController@delManager');
 
     Route::get('menu/list', 'MenuController@menuList');
     Route::get('menu/info', 'MenuController@menuInfo');
@@ -53,11 +52,13 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::delete('system/delete/{id}', 'SystemController@delSystem');
 
     Route::get('nav/list', 'NavigationController@navigationList');
+    Route::get('nav/info', 'NavigationController@navigationInfo');
     Route::post('nav/create', 'NavigationController@createNavigation');
     Route::put('nav/update/{id}', 'NavigationController@updateNavigation');
     Route::delete('nav/delete/{id}', 'NavigationController@delNavigation');
 
     Route::get('slide/list', 'SlideShowController@slideList');
+    Route::get('slide/info', 'SlideShowController@slideInfo');
     Route::post('slide/create', 'SlideShowController@createSlide');
     Route::put('slide/update/{id}', 'SlideShowController@updateSlide');
     Route::delete('slide/delete/{id}', 'SlideShowController@delSlide');
@@ -88,6 +89,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::get('article/sort/tree', 'ArticleSortController@getSortTree');
 
     Route::get('email/list', 'EmailController@emailList');
+    Route::get('email/info', 'EmailController@emailInfo');
     Route::post('email/create', 'EmailController@createEmail');
     Route::put('email/update/{id}', 'EmailController@updateEmail');
     Route::delete('email/delete/{id}', 'EmailController@delEmail');
@@ -98,6 +100,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'ValidateToken'], function 
     Route::delete('email_log/delete/{id}', 'EmailLogController@delEmailLog');
 
     Route::get('email_template/list', 'EmailTemplateController@templateList');
+    Route::get('email_template/info', 'EmailTemplateController@templateInfo');
     Route::post('email_template/create', 'EmailTemplateController@createTemplate');
     Route::put('email_template/update/{id}', 'EmailTemplateController@updateTemplate');
     Route::delete('email_template/delete/{id}', 'EmailTemplateController@delTemplate');

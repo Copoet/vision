@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\Common\ImageService;
 use Illuminate\Http\Request;
 use App\Services\Common\CodeService;
 
@@ -24,14 +25,13 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-        $manager = resolve('App\Services\ManagerService');
-
+        $manager  = resolve('App\Services\ManagerService');
         $name     = $request->input('name');
         $password = $request->input('password');
         if (empty($name) || empty($password)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
-        $managerInfo = $manager->getManagerInfo($name);
+        $managerInfo = $manager->getManagerInfo(['name' => $name]);
 
         $token = auth()->attempt(['name' => $name, 'password' => $password], true);
 
