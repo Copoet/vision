@@ -45,11 +45,10 @@ class ArticleController extends Controller
 
     /**
      * 获取文章详情
-     * @param Request $request
+     * @param int $id
      */
-    public function articleInfo(Request $request)
+    public function articleInfo(int $id)
     {
-        $id = $request->input('id');
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }

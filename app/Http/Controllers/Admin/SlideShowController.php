@@ -48,11 +48,11 @@ class SlideShowController extends Controller
     }
 
     /**
-     * @param Request $request
+     * 获取轮播图信息
+     * @param int $id
      */
-    public function slideInfo(Request $request)
+    public function slideInfo(int $id)
     {
-        $id = $request->input('id');
 
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);

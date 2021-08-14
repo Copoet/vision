@@ -58,10 +58,8 @@ class ManagerController extends Controller
     }
 
 
-    public function managerInfo(Request $request)
+    public function managerInfo(int $id)
     {
-        $id = $request->input('id');
-
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }

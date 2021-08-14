@@ -43,12 +43,10 @@ class EmailController extends Controller
 
     /**
      * 邮箱详情
-     * @param Request $request
+     * @param $id
      */
-    public function emailInfo(Request $request)
+    public function emailInfo(int $id)
     {
-        $id = $request->input('id');
-
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
