@@ -36,6 +36,28 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('manager/update/{id}', 'ManagerController@updateManager');
     Route::delete('manager/delete/{id}', 'ManagerController@delManager');
 
+    Route::get('auth_role/list', 'AuthRoleController@list');
+    Route::post('auth_role/create', 'AuthRoleController@create');
+    Route::put('auth_role/update/{id}', 'AuthRoleController@update');
+    Route::delete('auth_role/delete/{id}', 'AuthRoleController@delete');
+
+    Route::get('auth_manager_role/list', 'AuthManagerRoleController@list');
+    Route::post('auth_manager_role/create', 'AuthManagerRoleController@create');
+    Route::put('auth_manager_role/update/{id}', 'AuthManagerRoleController@update');
+    Route::delete('auth_manager_role/delete/{id}', 'AuthManagerRoleController@delete');
+
+
+    Route::get('auth_permissions/list', 'AuthPermissionsController@list');
+    Route::post('auth_permissions/create', 'AuthPermissionsController@create');
+    Route::put('auth_permissions/update/{id}', 'AuthPermissionsController@update');
+    Route::delete('auth_permissions/delete/{id}', 'AuthPermissionsController@delete');
+
+    Route::get('auth_role_permissions/list', 'AuthRolePermissionsController@list');
+    Route::post('auth_role_permissions/create', 'AuthRolePermissionsController@create');
+    Route::put('auth_role_permissions/update/{id}', 'AuthRolePermissionsController@update');
+    Route::delete('auth_role_permissions/delete/{id}', 'AuthRolePermissionsController@delete');
+
+
     Route::get('menu/list', 'MenuController@menuList');
     Route::get('menu/info/{id}', 'MenuController@menuInfo');
     Route::any('menu/tree', 'MenuController@menuTree');
@@ -104,27 +126,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::post('email_template/create', 'EmailTemplateController@createTemplate');
     Route::put('email_template/update/{id}', 'EmailTemplateController@updateTemplate');
     Route::delete('email_template/delete/{id}', 'EmailTemplateController@delTemplate');
-
-
-    Route::get('auth_role/list', 'AuthRoleController@list');
-    Route::post('auth_role/create', 'AuthRoleController@create');
-    Route::put('auth_role/update/{id}', 'AuthRoleController@update');
-    Route::delete('auth_role/delete/{id}', 'AuthRoleController@delete');
-
-    Route::get('auth_group_access/list', 'AuthGroupAccessController@list');
-    Route::post('auth_group_access/create', 'AuthGroupAccessController@create');
-    Route::put('auth_group_access/update/{id}', 'AuthGroupAccessController@update');
-    Route::delete('auth_group_access/delete/{id}', 'AuthGroupAccessController@delete');
-
-    Route::get('auth_role_rule/list', 'AuthRoleRuleController@list');
-    Route::post('auth_role_rule/create', 'AuthRoleRuleController@create');
-    Route::put('auth_role_rule/update/{id}', 'AuthRoleRuleController@update');
-    Route::delete('auth_role_rule/delete/{id}', 'AuthRoleRuleController@delete');
-
-    Route::get('auth_manager/list', 'AuthManagerGroupController@list');
-    Route::post('auth_manager/create', 'AuthManagerGroupController@create');
-    Route::put('auth_manager/update/{id}', 'AuthManagerGroupController@update');
-    Route::delete('auth_manager/delete/{id}', 'AuthManagerGroupController@delete');
 
 
 });

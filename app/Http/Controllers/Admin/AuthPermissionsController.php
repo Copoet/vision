@@ -9,7 +9,7 @@ use App\Services\AuthGroupAccessService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
-class AuthGroupAccessController extends Controller
+class AuthPermissionsController extends Controller
 {
     protected $authGroupAccess;
 
