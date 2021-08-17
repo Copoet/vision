@@ -106,10 +106,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::delete('email_template/delete/{id}', 'EmailTemplateController@delTemplate');
 
 
-    Route::get('auth_rule/list', 'AuthRuleController@list');
-    Route::post('auth_rule/create', 'AuthRuleController@create');
-    Route::put('auth_rule/update/{id}', 'AuthRuleController@update');
-    Route::delete('auth_rule/delete/{id}', 'AuthRuleController@delete');
+    Route::get('auth_role/list', 'AuthRoleController@list');
+    Route::post('auth_role/create', 'AuthRoleController@create');
+    Route::put('auth_role/update/{id}', 'AuthRoleController@update');
+    Route::delete('auth_role/delete/{id}', 'AuthRoleController@delete');
 
     Route::get('auth_group_access/list', 'AuthGroupAccessController@list');
     Route::post('auth_group_access/create', 'AuthGroupAccessController@create');

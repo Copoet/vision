@@ -4,9 +4,9 @@
 namespace App\Services;
 
 
-use App\Models\AuthRule;
+use App\Models\AuthRole;
 
-class AuthRuleService
+class AuthRoleService
 {
     /**
      * 获取单条信息
@@ -18,7 +18,7 @@ class AuthRuleService
     public function getInfo($where, $columns = ['*'])
     {
 
-        return AuthRule::query()->where($where)
+        return AuthRole::query()->where($where)
             ->get($columns)
             ->toArray();
 
@@ -39,7 +39,7 @@ class AuthRuleService
     public function getList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = AuthRule::query(function ($query) use ($where) {
+        $result['total'] = AuthRole::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -47,7 +47,7 @@ class AuthRuleService
 
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = AuthRule::query()->where(function ($query) use ($where) {
+        $result['list'] = AuthRole::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -70,7 +70,7 @@ class AuthRuleService
      */
     public function store($param)
     {
-        return AuthRule::query()->create($param);
+        return AuthRole::query()->create($param);
     }
 
     /**
@@ -82,7 +82,7 @@ class AuthRuleService
     public function del($where)
     {
 
-        return AuthRule::query()->where($where)->update(['status' => 2]);
+        return AuthRole::query()->where($where)->update(['status' => 2]);
 
     }
 
@@ -97,6 +97,6 @@ class AuthRuleService
     public function update($where, $param)
     {
 
-        return AuthRule::query()->where($where)->update($param);
+        return AuthRole::query()->where($where)->update($param);
     }
 }

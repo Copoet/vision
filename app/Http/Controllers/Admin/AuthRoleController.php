@@ -5,20 +5,20 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\Services\AuthRuleService;
+use App\Services\AuthRoleService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
-class AuthRuleController extends Controller
+class AuthRoleController extends Controller
 {
 
 
-    protected $authRuleService;
+    protected $authRoleService;
 
 
     public function __construct(AuthRuleService $service)
     {
-        $this->authRuleService = $service;
+        $this->authRoleService = $service;
     }
 
 
@@ -32,7 +32,7 @@ class AuthRuleController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authRuleService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authRoleService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list);
@@ -65,7 +65,7 @@ class AuthRuleController extends Controller
         $data['status']  = $status;
         $data['action']  = $action;
 
-        $result = $this->authRuleService->store($data);
+        $result = $this->authRoleService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -101,7 +101,7 @@ class AuthRuleController extends Controller
         $data['action']    = $action;
         $data['is_delete'] = $isDelete;
 
-        $result = $this->authRuleService->update(['id' => $id], $data);
+        $result = $this->authRoleService->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -124,7 +124,7 @@ class AuthRuleController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->authRuleService->del(['id' => $id]);
+        $result = $this->authRoleService->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);
