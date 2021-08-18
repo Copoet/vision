@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\Services\AuthRoleRuleService;
+use App\Services\AuthRolePermissionsService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
 class AuthRolePermissionsController extends Controller
 {
-    protected $authRoleRuleService;
+    protected $authRolePermissionsService;
 
 
-    public function __construct(AuthRoleRuleService $service)
+    public function __construct(AuthRolePermissionsService $service)
     {
-        $this->authRoleRuleService = $service;
+        $this->authRolePermissionsService = $service;
     }
 
 
@@ -29,7 +29,7 @@ class AuthRolePermissionsController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authRoleRuleService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authRolePermissionsService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list);
@@ -61,7 +61,7 @@ class AuthRolePermissionsController extends Controller
         $data['status']   = $status;
         $data['action']   = $action;
 
-        $result = $this->authRoleRuleService->store($data);
+        $result = $this->authRolePermissionsService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -96,7 +96,7 @@ class AuthRolePermissionsController extends Controller
         $data['action']    = $action;
         $data['id_delete'] = $isDelete;
 
-        $result = $this->authRoleRuleService->update(['id' => $id], $data);
+        $result = $this->authRolePermissionsService->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -120,7 +120,7 @@ class AuthRolePermissionsController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->authRoleRuleService->del(['id' => $id]);
+        $result = $this->authRolePermissionsService->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);

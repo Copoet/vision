@@ -3,10 +3,10 @@
 namespace App\Models;
 
 
-use App\Enum\AuthRoleRuleEnum;
+use App\Enum\AuthRolePermissionsEnum;
 use Illuminate\Database\Eloquent\Model;
 
-class AuthRoleRule extends Model
+class AuthRolePermissions extends Model
 {
     protected $table = 'auth_role_rule';
 
@@ -21,13 +21,13 @@ class AuthRoleRule extends Model
 
     public function getStatusStrAttribute($value)
     {
-        return AuthRoleRuleEnum::STATUS[$value];
+        return AuthRolePermissionsEnum::STATUS[$value];
     }
 
 
     public function getIsDeleteStrAttribute($value)
     {
-        return AuthRoleRuleEnum::DELETE[$value];
+        return AuthRolePermissionsEnum::DELETE[$value];
     }
 
     public function getCreateTimeAttribute($value){

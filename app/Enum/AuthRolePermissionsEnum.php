@@ -4,7 +4,7 @@
 namespace App\Enum;
 
 
-class AuthRoleRuleEnum
+class AuthRolePermissionsEnum
 {
     const STATUS = [
         1 => '启用',
