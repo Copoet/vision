@@ -4,10 +4,10 @@
 namespace App\Models;
 
 
-use App\Enum\AuthGroupAccessEnum;
+use App\Enum\AuthPermissionsEnum;
 use Illuminate\Database\Eloquent\Model;
 
-class AuthGroupAccess extends Model
+class AuthPermissions extends Model
 {
     protected $table = 'auth_group_access';
 
@@ -22,13 +22,13 @@ class AuthGroupAccess extends Model
 
     public function getStatusStrAttribute($value)
     {
-        return AuthGroupAccessEnum::STATUS[$value];
+        return AuthPermissionsEnum::STATUS[$value];
     }
 
 
     public function getIsDeleteStrAttribute($value)
     {
-        return AuthGroupAccessEnum::DELETE[$value];
+        return AuthPermissionsEnum::DELETE[$value];
     }
 
     public function getCreateTimeAttribute($value){

@@ -4,9 +4,9 @@
 namespace App\Services;
 
 
-use App\Models\AuthGroupAccess;
+use App\Models\AuthPermissions;
 
-class AuthGroupAccessService
+class AuthPermissionsService
 {
 
     /**
@@ -19,7 +19,7 @@ class AuthGroupAccessService
     public function getInfo($where, $columns = ['*'])
     {
 
-        return AuthGroupAccess::query()->where($where)
+        return AuthPermissions::query()->where($where)
             ->get($columns)
             ->toArray();
 
@@ -40,7 +40,7 @@ class AuthGroupAccessService
     public function getList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = AuthGroupAccess::query(function ($query) use ($where) {
+        $result['total'] = AuthPermissions::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -48,7 +48,7 @@ class AuthGroupAccessService
 
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = AuthGroupAccess::query()->where(function ($query) use ($where) {
+        $result['list'] = AuthPermissions::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
@@ -71,7 +71,7 @@ class AuthGroupAccessService
      */
     public function store($param)
     {
-        return AuthGroupAccess::query()->create($param);
+        return AuthPermissions::query()->create($param);
     }
 
     /**
@@ -83,7 +83,7 @@ class AuthGroupAccessService
     public function del($where)
     {
 
-        return AuthGroupAccess::query()->where($where)->update(['id_delete' => 1]);
+        return AuthPermissions::query()->where($where)->update(['id_delete' => 1]);
 
     }
 
@@ -98,6 +98,6 @@ class AuthGroupAccessService
     public function update($where, $param)
     {
 
-        return AuthGroupAccess::query()->where($where)->update($param);
+        return AuthPermissions::query()->where($where)->update($param);
     }
 }

@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\Services\AuthGroupAccessService;
+use App\Services\AuthPermissionsService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
 class AuthPermissionsController extends Controller
 {
-    protected $authGroupAccess;
+    protected $authPermissionsService;
 
 
-    public function __construct(AuthGroupAccessService $service)
+    public function __construct(AuthPermissionsService $service)
     {
-        $this->authGroupAccess = $service;
+        $this->authPermissionsService = $service;
     }
 
 
@@ -30,7 +30,7 @@ class AuthPermissionsController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authGroupAccess->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authPermissionsService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
         if ($list) {
             $this->returnSuccess($list);
         } else {
@@ -60,7 +60,7 @@ class AuthPermissionsController extends Controller
         $data['uid']      = $uid;
         $data['group_id'] = $groupId;
 
-        $result = $this->authGroupAccess->store($data);
+        $result = $this->authPermissionsService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -93,7 +93,7 @@ class AuthPermissionsController extends Controller
         $data['uid']      = $uid;
         $data['group_id'] = $groupId;
 
-        $result = $this->authGroupAccess->update($data);
+        $result = $this->authPermissionsService->update($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -110,7 +110,7 @@ class AuthPermissionsController extends Controller
     public function delete(int $id)
     {
 
-        $result = $this->authGroupAccess->del(['id' => $id]);
+        $result = $this->authPermissionsService->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);
