@@ -4,7 +4,7 @@
 namespace App\Enum;
 
 
-class AuthManagerGroupEnum
+class AuthManagerRoleEnum
 {
     const STATUS = [
         1 => '启用',

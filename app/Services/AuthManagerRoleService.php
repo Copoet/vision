@@ -4,9 +4,9 @@
 namespace App\Services;
 
 
-use App\Models\AuthManagerGroup;
+use App\Models\AuthManagerRole;
 
-class AuthManagerGroupService
+class AuthManagerRoleService
 {
 
     /**
@@ -19,7 +19,7 @@ class AuthManagerGroupService
     public function getInfo($where, $columns = ['*'])
     {
 
-        return AuthManagerGroup::query()->where($where)
+        return AuthManagerRole::query()->where($where)
             ->get($columns)
             ->toArray();
 
@@ -40,7 +40,7 @@ class AuthManagerGroupService
     public function getList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = AuthManagerGroup::query(function ($query) use ($where) {
+        $result['total'] = AuthManagerRole::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -48,7 +48,7 @@ class AuthManagerGroupService
 
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = AuthManagerGroup::query()->where(function ($query) use ($where) {
+        $result['list'] = AuthManagerRole::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -71,7 +71,7 @@ class AuthManagerGroupService
      */
     public function store($param)
     {
-        return AuthManagerGroup::query()->create($param);
+        return AuthManagerRole::query()->create($param);
     }
 
     /**
@@ -83,7 +83,7 @@ class AuthManagerGroupService
     public function del($where)
     {
 
-        return AuthManagerGroup::query()->where($where)->update(['id_delete' => 2]);
+        return AuthManagerRole::query()->where($where)->update(['id_delete' => 2]);
 
     }
 
@@ -98,6 +98,6 @@ class AuthManagerGroupService
     public function update($where, $param)
     {
 
-        return AuthManagerGroup::query()->where($where)->update($param);
+        return AuthManagerRole::query()->where($where)->update($param);
     }
 }

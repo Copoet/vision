@@ -4,10 +4,10 @@
 namespace App\Models;
 
 
-use App\Enum\AuthManagerGroupEnum;
+use App\Enum\AuthManagerRoleEnum;
 use Illuminate\Database\Eloquent\Model;
 
-class AuthManagerGroup extends Model
+class AuthManagerRole extends Model
 {
     protected $table = 'auth_manager_group';
 
@@ -22,13 +22,13 @@ class AuthManagerGroup extends Model
 
     public function getStatusStrAttribute($value)
     {
-        return AuthManagerGroupEnum::STATUS[$value];
+        return AuthManagerRoleEnum::STATUS[$value];
     }
 
 
     public function getIsDeleteStrAttribute($value)
     {
-        return AuthManagerGroupEnum::DELETE[$value];
+        return AuthManagerRoleEnum::DELETE[$value];
     }
 
     public function getCreateTimeAttribute($value){

@@ -4,18 +4,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\AuthManagerGroupService;
+use App\Services\AuthManagerRoleService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
 class AuthManagerRoleController extends Controller
 {
-    protected $authManagerGroup;
+    protected $authManagerRole;
 
 
-    public function __construct(AuthManagerGroupService $service)
+    public function __construct(AuthManagerRoleService $service)
     {
-        $this->authManagerGroup = $service;
+        $this->authManagerRole = $service;
     }
 
 
@@ -29,7 +29,7 @@ class AuthManagerRoleController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authManagerGroup->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authManagerRole->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list);
@@ -60,7 +60,7 @@ class AuthManagerRoleController extends Controller
         $data['description'] = $description;
         $data['status']      = $status;
 
-        $result = $this->authManagerGroup->store($data);
+        $result = $this->authManagerRole->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -91,7 +91,7 @@ class AuthManagerRoleController extends Controller
         $data['description'] = $description;
         $data['status']      = $status;
 
-        $result = $this->authManagerGroup->update(['id' => $id], $data);
+        $result = $this->authManagerRole->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -115,7 +115,7 @@ class AuthManagerRoleController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->authManagerGroup->del(['id' => $id]);
+        $result = $this->authManagerRole->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);

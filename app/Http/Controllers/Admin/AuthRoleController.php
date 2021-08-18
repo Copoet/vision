@@ -16,7 +16,7 @@ class AuthRoleController extends Controller
     protected $authRoleService;
 
 
-    public function __construct(AuthRuleService $service)
+    public function __construct(AuthRoleService $service)
     {
         $this->authRoleService = $service;
     }
