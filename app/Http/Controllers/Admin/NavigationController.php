@@ -47,10 +47,12 @@ class NavigationController extends Controller
     }
 
 
-    public function navigationInfo(Request $request)
+    /**
+     * 获取导航信息
+     * @param int $id
+     */
+    public function navigationInfo(int $id)
     {
-        $id = $request->input('id');
-
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }

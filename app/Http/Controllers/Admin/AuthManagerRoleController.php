@@ -3,20 +3,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
-use App\Services\AuthGroupAccessService;
+use App\Services\AuthManagerRoleService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
-class AuthGroupAccessController extends Controller
+class AuthManagerRoleController extends Controller
 {
-    protected $authGroupAccess;
+    protected $authManagerRole;
 
 
-    public function __construct(AuthGroupAccessService $service)
+    public function __construct(AuthManagerRoleService $service)
     {
-        $this->authGroupAccess = $service;
+        $this->authManagerRole = $service;
     }
 
 
@@ -30,7 +29,8 @@ class AuthGroupAccessController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authGroupAccess->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authManagerRole->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+
         if ($list) {
             $this->returnSuccess($list);
         } else {
@@ -46,21 +46,21 @@ class AuthGroupAccessController extends Controller
      */
     public function create(Request $request)
     {
-        $id      = $request->input('id');
-        $uid     = $request->input('uid');
-        $groupId = $request->input('group_id');
+        $name        = $request->input('name');
+        $status      = $request->input('status');
+        $description = $request->input('description');
 
-        if (empty($name) || empty($groupId)) {
+        if (empty($name) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
 
-        $data['id']       = $id;
-        $data['uid']      = $uid;
-        $data['group_id'] = $groupId;
+        $data['group_name']  = $name;
+        $data['description'] = $description;
+        $data['status']      = $status;
 
-        $result = $this->authGroupAccess->store($data);
+        $result = $this->authManagerRole->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -68,32 +68,30 @@ class AuthGroupAccessController extends Controller
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
 
-
     }
 
 
     /**
      * 更新操作
-     * @param int $id
      * @param Request $request
      */
-    public function update(int $id,Request $request)
+    public function update(Request $request)
     {
+        $name        = $request->input('name');
+        $status      = $request->input('status');
+        $description = $request->input('description');
+        $id          = $request->input('id');
 
-        $uid     = $request->input('uid');
-        $groupId = $request->input('group_id');
-
-        if (empty($name) || empty($groupId)) {
+        if (empty($name) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
+        $data['group_name']  = $name;
+        $data['description'] = $description;
+        $data['status']      = $status;
 
-        $data['id']       = $id;
-        $data['uid']      = $uid;
-        $data['group_id'] = $groupId;
-
-        $result = $this->authGroupAccess->update($data);
+        $result = $this->authManagerRole->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -105,12 +103,19 @@ class AuthGroupAccessController extends Controller
 
     /**
      * 删除操作
-     * @param int $id
+     * @param Request $request
      */
-    public function delete(int $id)
+    public function delete(Request $request)
     {
 
-        $result = $this->authGroupAccess->del(['id' => $id]);
+        $id = $request->input('id');
+
+        if (empty($id)) {
+
+            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
+        }
+
+        $result = $this->authManagerRole->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);

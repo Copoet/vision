@@ -55,11 +55,10 @@ class MenuController extends Controller
     }
 
     /**
+     * @param int $id
      * 获取菜单信息
-     * @param Request $request
      */
-    public function menuInfo(Request $request){
-        $id = $request->input('id');
+    public function menuInfo(int $id){
 
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);

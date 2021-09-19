@@ -42,12 +42,10 @@ class EmailTemplateController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param Request $id
      */
-    public function templateInfo(Request $request)
+    public function templateInfo(int $id)
     {
-        $id = $request->input('id');
-
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }

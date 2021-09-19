@@ -51,11 +51,11 @@ class SystemController extends Controller
     }
 
     /**
-     * @param Request $request
+     * 获取系统信息
+     * @param int $id
      */
-    public function systemInfo(Request $request){
+    public function systemInfo(int $id){
 
-        $id = $request->input('id');
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }

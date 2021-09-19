@@ -1,24 +1,21 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\Services\AuthRuleService;
+use App\Services\AuthRolePermissionsService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
-class AuthRuleController extends Controller
+class AuthRolePermissionsController extends Controller
 {
+    protected $authRolePermissionsService;
 
 
-    protected $authRuleService;
-
-
-    public function __construct(AuthRuleService $service)
+    public function __construct(AuthRolePermissionsService $service)
     {
-        $this->authRuleService = $service;
+        $this->authRolePermissionsService = $service;
     }
 
 
@@ -32,7 +29,7 @@ class AuthRuleController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authRuleService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authRolePermissionsService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list);
@@ -49,30 +46,28 @@ class AuthRuleController extends Controller
      */
     public function create(Request $request)
     {
+        $name    = $request->input('name');
+        $action  = $request->input('action');
+        $status  = $request->input('status');
+        $groupId = $request->input('group_id');
 
-        $menuId = $request->input('menu_id');
-        $action = $request->input('action');
-        $name   = $request->input('name');
-        $status = $request->input('status');
-
-        if (empty($name) || empty($menuId) || empty($action)) {
+        if (empty($name) || empty($groupId) || empty($action)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['menu_id'] = $menuId;
-        $data['name']    = $name;
-        $data['status']  = $status;
-        $data['action']  = $action;
+        $data['group_id'] = $groupId;
+        $data['name']     = $name;
+        $data['status']   = $status;
+        $data['action']   = $action;
 
-        $result = $this->authRuleService->store($data);
+        $result = $this->authRolePermissionsService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
-
 
     }
 
@@ -83,31 +78,32 @@ class AuthRuleController extends Controller
      */
     public function update(Request $request)
     {
-        $menuId   = $request->input('menu_id');
-        $action   = $request->input('action');
         $name     = $request->input('name');
+        $action   = $request->input('action');
         $status   = $request->input('status');
+        $groupId  = $request->input('group_id');
+        $isDelete = $request->input('group_id');
         $id       = $request->input('id');
-        $isDelete = $request->input('is_delete');
 
-        if (empty($name) || empty($menuId) || empty($action) || empty($id)) {
+        if (empty($name) || empty($groupId) || empty($action)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['menu_id']   = $menuId;
+        $data['group_id']  = $groupId;
         $data['name']      = $name;
         $data['status']    = $status;
         $data['action']    = $action;
-        $data['is_delete'] = $isDelete;
+        $data['id_delete'] = $isDelete;
 
-        $result = $this->authRuleService->update(['id' => $id], $data);
+        $result = $this->authRolePermissionsService->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
+
     }
 
 
@@ -124,13 +120,14 @@ class AuthRuleController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->authRuleService->del(['id' => $id]);
+        $result = $this->authRolePermissionsService->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
+
 
     }
 }

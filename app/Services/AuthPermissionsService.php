@@ -4,10 +4,11 @@
 namespace App\Services;
 
 
-use App\Models\AuthRule;
+use App\Models\AuthPermissions;
 
-class AuthRuleService
+class AuthPermissionsService
 {
+
     /**
      * 获取单条信息
      * @param $where
@@ -18,7 +19,7 @@ class AuthRuleService
     public function getInfo($where, $columns = ['*'])
     {
 
-        return AuthRule::query()->where($where)
+        return AuthPermissions::query()->where($where)
             ->get($columns)
             ->toArray();
 
@@ -39,7 +40,7 @@ class AuthRuleService
     public function getList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = AuthRule::query(function ($query) use ($where) {
+        $result['total'] = AuthPermissions::query(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -47,9 +48,9 @@ class AuthRuleService
 
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = AuthRule::query()->where(function ($query) use ($where) {
+        $result['list'] = AuthPermissions::query()->where(function ($query) use ($where) {
             if (isset($param['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyword'] . '%');
+                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
             }
         })
             ->offset($offset)
@@ -70,7 +71,7 @@ class AuthRuleService
      */
     public function store($param)
     {
-        return AuthRule::query()->create($param);
+        return AuthPermissions::query()->create($param);
     }
 
     /**
@@ -82,7 +83,7 @@ class AuthRuleService
     public function del($where)
     {
 
-        return AuthRule::query()->where($where)->update(['status' => 2]);
+        return AuthPermissions::query()->where($where)->update(['id_delete' => 1]);
 
     }
 
@@ -97,6 +98,6 @@ class AuthRuleService
     public function update($where, $param)
     {
 
-        return AuthRule::query()->where($where)->update($param);
+        return AuthPermissions::query()->where($where)->update($param);
     }
 }

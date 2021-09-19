@@ -1,15 +1,14 @@
 <?php
 
-
 namespace App\Models;
 
 
-use App\Enum\AuthManagerGroupEnum;
+use App\Enum\AuthRolePermissionsEnum;
 use Illuminate\Database\Eloquent\Model;
 
-class AuthManagerGroup extends Model
+class AuthRolePermissions extends Model
 {
-    protected $table = 'auth_manager_group';
+    protected $table = 'auth_role_rule';
 
 
     protected $primaryKey = 'id';
@@ -22,13 +21,13 @@ class AuthManagerGroup extends Model
 
     public function getStatusStrAttribute($value)
     {
-        return AuthManagerGroupEnum::STATUS[$value];
+        return AuthRolePermissionsEnum::STATUS[$value];
     }
 
 
     public function getIsDeleteStrAttribute($value)
     {
-        return AuthManagerGroupEnum::DELETE[$value];
+        return AuthRolePermissionsEnum::DELETE[$value];
     }
 
     public function getCreateTimeAttribute($value){

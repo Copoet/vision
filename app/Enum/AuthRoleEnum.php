@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Enum;
 
 
-class AuthManagerGroupEnum
+class AuthRoleEnum
 {
     const STATUS = [
         1 => '启用',

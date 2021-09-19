@@ -4,7 +4,7 @@
 namespace App\Enum;
 
 
-class AuthGroupAccessEnum
+class AuthPermissionsEnum
 {
     const STATUS = [
         1 => '启用',

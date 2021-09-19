@@ -3,19 +3,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
-use App\Services\AuthManagerGroupService;
+use App\Services\AuthRoleService;
 use App\Services\Common\CodeService;
 use Illuminate\Http\Request;
 
-class AuthManagerGroupController extends Controller
+class AuthRoleController extends Controller
 {
-    protected $authManagerGroup;
 
 
-    public function __construct(AuthManagerGroupService $service)
+    protected $authRoleService;
+
+
+    public function __construct(AuthRoleService $service)
     {
-        $this->authManagerGroup = $service;
+        $this->authRoleService = $service;
     }
 
 
@@ -29,7 +32,7 @@ class AuthManagerGroupController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authManagerGroup->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authRoleService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list);
@@ -46,27 +49,30 @@ class AuthManagerGroupController extends Controller
      */
     public function create(Request $request)
     {
-        $name        = $request->input('name');
-        $status      = $request->input('status');
-        $description = $request->input('description');
 
-        if (empty($name) || empty($status)) {
+        $menuId = $request->input('menu_id');
+        $action = $request->input('action');
+        $name   = $request->input('name');
+        $status = $request->input('status');
+
+        if (empty($name) || empty($menuId) || empty($action)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
+        $data['menu_id'] = $menuId;
+        $data['name']    = $name;
+        $data['status']  = $status;
+        $data['action']  = $action;
 
-        $data['group_name']  = $name;
-        $data['description'] = $description;
-        $data['status']      = $status;
-
-        $result = $this->authManagerGroup->store($data);
+        $result = $this->authRoleService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
+
 
     }
 
@@ -77,21 +83,25 @@ class AuthManagerGroupController extends Controller
      */
     public function update(Request $request)
     {
-        $name        = $request->input('name');
-        $status      = $request->input('status');
-        $description = $request->input('description');
-        $id          = $request->input('id');
+        $menuId   = $request->input('menu_id');
+        $action   = $request->input('action');
+        $name     = $request->input('name');
+        $status   = $request->input('status');
+        $id       = $request->input('id');
+        $isDelete = $request->input('is_delete');
 
-        if (empty($name) || empty($status)) {
+        if (empty($name) || empty($menuId) || empty($action) || empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['group_name']  = $name;
-        $data['description'] = $description;
-        $data['status']      = $status;
+        $data['menu_id']   = $menuId;
+        $data['name']      = $name;
+        $data['status']    = $status;
+        $data['action']    = $action;
+        $data['is_delete'] = $isDelete;
 
-        $result = $this->authManagerGroup->update(['id' => $id], $data);
+        $result = $this->authRoleService->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -107,7 +117,6 @@ class AuthManagerGroupController extends Controller
      */
     public function delete(Request $request)
     {
-
         $id = $request->input('id');
 
         if (empty($id)) {
@@ -115,7 +124,7 @@ class AuthManagerGroupController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $result = $this->authManagerGroup->del(['id' => $id]);
+        $result = $this->authRoleService->del(['id' => $id]);
 
         if ($result) {
             $this->returnSuccess($result);

@@ -41,13 +41,13 @@ class ArticleSortController extends Controller
         }
     }
 
+
     /**
      * 获取文章详情
-     * @param Request $request
+     * @param int $id
      */
-    public function articleSortInfo(Request $request)
+    public function articleSortInfo(int $id)
     {
-        $id = $request->input('id');
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
