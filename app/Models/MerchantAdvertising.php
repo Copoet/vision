@@ -41,4 +41,10 @@ class MerchantAdvertising extends Model
 
         return date('Y-m-d H:i:s',strtotime($value));
     }
+
+    public function advertisingPoint(){
+
+        return $this->hasMany('App\Models\AdvertisingPoint','id','advertising_point_id');
+    }
+
 }

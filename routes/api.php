@@ -26,6 +26,13 @@ Route::group(['namespace' => 'Admin'], function () {
 });
 
 
+Route::group(['namespace' => 'Api'], function () {
+    Route::post('wechat/login', 'LoginController@login');
+    Route::get('wechat/index', 'AdvertisingPointController@getPointData');
+    Route::get('wechat/list', 'AdvertisingPointController@getMerchantPoint');
+    Route::get('wechat/logout', 'LoginController@logout');
+});
+
 //common
 Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function () {
 
