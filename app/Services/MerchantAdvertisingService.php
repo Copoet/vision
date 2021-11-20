@@ -108,7 +108,7 @@ class MerchantAdvertisingService
                     $query->where('merchant_id',$param['merchant_id'] );
                 }
             })->count();
-
+        dd($result);
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = MerchantAdvertising::query()->where(function ($query) use ($param) {
