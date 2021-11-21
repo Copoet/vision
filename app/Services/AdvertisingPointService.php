@@ -64,7 +64,7 @@ class AdvertisingPointService
         })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['id', 'name', 'type', 'mage_url', 'longitude', 'latitude'])
+            ->get(['id', 'name', 'type', 'image_url', 'longitude', 'latitude'])
             ->toArray();
 
         return $result;
