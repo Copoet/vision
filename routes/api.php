@@ -29,8 +29,13 @@ Route::group(['namespace' => 'Admin'], function () {
 Route::group(['namespace' => 'Api'], function () {
     Route::post('wechat/login', 'LoginController@login');
     Route::get('wechat/index', 'AdvertisingPointController@getPointData');
-    Route::get('wechat/list', 'AdvertisingPointController@getMerchantPoint');
+    Route::get('wechat/list', 'MerchantController@getMerchantPoint');
+    Route::get('wechat/info', 'MerchantController@merchantInfo');
+    Route::post('wechat/upload', 'UploadController@uploadImage');
+    Route::post('wechat/operate', 'OperateController@operate');
+    Route::get('wechat/log', 'OperateController@getOperate');
     Route::get('wechat/logout', 'LoginController@logout');
+
 });
 
 //common

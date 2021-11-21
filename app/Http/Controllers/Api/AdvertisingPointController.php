@@ -59,7 +59,6 @@ class AdvertisingPointController extends Controller
         $list['merchant_point_str'] = '投放点位';
         $list['ratio_str']          = '投放占比';
 
-
         if ($list) {
             $this->returnSuccess($list);
         } else {
@@ -69,22 +68,7 @@ class AdvertisingPointController extends Controller
     }
 
 
-    public function getMerchantPoint(Request $request)
-    {
-        $page       = $request->input('page') ? $request->input('page') : 1;
-        $pageSize   = $request->input('page_size') ? $request->input('page_size') : 999;
-        $merchantId = $request->input('merchant_id');
-        if (empty($merchantId)) {
-            $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
-        }
-        $param = $request->all();
-        $list  = $this->merchantAdvertising->getMerchantAdvertising($param, $page, $pageSize);
-        if ($list) {
-            $this->returnSuccess($list);
-        } else {
-            $this->returnFail(CodeService::PUBLIC_ERROR);
-        }
-    }
+
 
 
 }

@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Models\MerchantAdvertising;
+use Illuminate\Support\Facades\DB;
 
 class MerchantAdvertisingService
 {
@@ -98,31 +99,34 @@ class MerchantAdvertisingService
 
     public function getMerchantAdvertising($param, $page, $pageSize)
     {
-        $result['total'] = MerchantAdvertising::query()
-            ->withCount(['advertisingPoint:name as name'])
+        $result['total'] = DB::table('merchant_advertising as ma')
+            ->join('advertising_point as ap', 'ma.advertising_point_id', '=', 'ap.id')
             ->where(function ($query) use ($param) {
                 if (isset($param['keyword'])) {
-                    $query->where('advertisingPoint:name', 'like', '%' . $param['keyword'] . '%');
+                    $query->where('ap.name', 'like', '%' . $param['keyword'] . '%');
                 }
                 if (isset($param['merchant_id'])) {
                     $query->where('merchant_id',$param['merchant_id'] );
                 }
             })->count();
-        dd($result);
-        $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = MerchantAdvertising::query()->where(function ($query) use ($param) {
-            if (isset($param['keyword'])) {
-                $query->where('advertisingPoint:name', 'like', '%' . $param['keyword'] . '%');
-            }
-        })
-            ->with(['advertisingPoint:id,name,mage_url,type'])
+        $offset = ($page - 1) * $pageSize;
+        $result['list'] = DB::table('merchant_advertising as ma')
+            ->join('advertising_point as ap', 'ma.advertising_point_id', '=', 'ap.id')
+            ->where(function ($query) use ($param) {
+                if (isset($param['keyword'])) {
+                    $query->where('ap.name', 'like', '%' . $param['keyword'] . '%');
+                }
+                if (isset($param['merchant_id'])) {
+                    $query->where('merchant_id',$param['merchant_id'] );
+                }
+            })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['id', 'merchant_id', 'advertising_point_id', 'begin_time', 'end_time', 'create_time', 'update_time', 'is_delete',])
+            ->get(['ap.name as name','image_url','merchant_id', 'advertising_point_id', 'begin_time', 'end_time', 'ma.create_time', 'ma.update_time',])
             ->toArray();
-
         return $result;
     }
+
 
 }
