@@ -51,7 +51,7 @@ class OperateController extends Controller
         }
         $result = DB::table('advertising_operate')->insert($data);
         if ($result) {
-            $this->returnSuccess(CodeService::PUBLIC_SUCCESS);
+            $this->returnSuccess('',CodeService::PUBLIC_SUCCESS);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
@@ -89,7 +89,11 @@ class OperateController extends Controller
             ->limit($pageSize)
             ->get(['ad_image_url','status', 'create_time', 'update_time',])
             ->toArray();
-        return $result;
+        if ($result) {
+            $this->returnSuccess($result,CodeService::PUBLIC_SUCCESS);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
 
     }
 
