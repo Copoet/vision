@@ -35,6 +35,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('wechat/operate', 'OperateController@operate');
     Route::get('wechat/log', 'OperateController@getOperate');
     Route::get('wechat/logout', 'LoginController@logout');
+    Route::get('wechat/point_list', 'AdvertisingPointController@getPointList');
 
 });
 

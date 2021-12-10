@@ -68,7 +68,30 @@ class AdvertisingPointController extends Controller
     }
 
 
-
+    /**
+     * 获取所有点位信息
+     * @param Request $request
+     */
+    public function getPointList(Request $request)
+    {
+        $page     = $request->input('page') ? $request->input('page') : 1;
+        $pageSize = $request->input('page_size') ? $request->input('page_size') : 999;
+        $param    = $request->all();
+        $list     = $this->pointService->getList($param, $page, $pageSize);
+        if ($list) {
+            if(!empty($list['list'])){
+                foreach ($list['list'] as $key=>&$val){
+                    unset($val['type']);
+                    unset($val['image_url']);
+                    unset($val['longitude']);
+                    unset($val['latitude']);
+                }
+            }
+            $this->returnSuccess($list);
+        } else {
+            $this->returnFail(CodeService::PUBLIC_ERROR);
+        }
+    }
 
 
 }
