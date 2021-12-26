@@ -41,17 +41,18 @@ class OperateController extends Controller
         if (empty($pointId) || empty($urls) || empty($merchantId)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
-        $urlsArray = explode(',',$urls);
-        $data = [];
-        foreach ($urlsArray as $key){
-            $temp['ad_image_url']    = $key;
-            $temp['create_time']    = date('Y-m-d H:i:s',time());
-            $temp['update_time']    = date('Y-m-d H:i:s',time());
-            $data[] = $temp;
+        $urlsArray = explode(',', $urls);
+        $data      = [];
+        foreach ($urlsArray as $key) {
+            $temp['ad_image_url'] = $key;
+            $temp['point_id']     = $pointId;
+            $temp['create_time']  = date('Y-m-d H:i:s', time());
+            $temp['update_time']  = date('Y-m-d H:i:s', time());
+            $data[]               = $temp;
         }
         $result = DB::table('advertising_operate')->insert($data);
         if ($result) {
-            $this->returnSuccess('',CodeService::PUBLIC_SUCCESS);
+            $this->returnSuccess('', CodeService::PUBLIC_SUCCESS);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
@@ -62,7 +63,8 @@ class OperateController extends Controller
      * 后去运营图片
      * @param Request $request
      */
-    public function getOperate(Request $request){
+    public function getOperate(Request $request)
+    {
         $pointId    = $request->input('point_id');
         $merchantId = $request->input('merchant_id');
         $page       = $request->input('page') ? $request->input('page') : 1;
@@ -70,27 +72,27 @@ class OperateController extends Controller
         if (empty($pointId) || empty($merchantId)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
-        $param = $request->all();
+        $param           = $request->all();
         $result['total'] = DB::table('advertising_operate')
             ->where(function ($query) use ($param) {
                 if (isset($param['point_id'])) {
-                    $query->where('point_id',$param['point_id'] );
+                    $query->where('point_id', $param['point_id']);
                 }
             })->count();
 
-        $offset = ($page - 1) * $pageSize;
+        $offset         = ($page - 1) * $pageSize;
         $result['list'] = DB::table('advertising_operate')
             ->where(function ($query) use ($param) {
                 if (isset($param['point_id'])) {
-                    $query->where('point_id',$param['point_id'] );
+                    $query->where('point_id', $param['point_id']);
                 }
             })
             ->offset($offset)
             ->limit($pageSize)
-            ->get(['ad_image_url','status', 'create_time', 'update_time',])
+            ->get(['ad_image_url', 'status', 'create_time', 'update_time',])
             ->toArray();
         if ($result) {
-            $this->returnSuccess($result,CodeService::PUBLIC_SUCCESS);
+            $this->returnSuccess($result, CodeService::PUBLIC_SUCCESS);
         } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }

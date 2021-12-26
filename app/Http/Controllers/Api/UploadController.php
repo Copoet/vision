@@ -37,7 +37,7 @@ class UploadController extends Controller
         $filePath = $savePath . '/' . $newPictureName;
         if($picture->storePubliclyAs($savePath, $newPictureName, ['disk' => 'public'])){
 
-            $this->returnSuccess($request->server('HTTP_HOST').'/storage/'.$filePath, CodeService::PUBLIC_SUCCESS);
+            $this->returnSuccess('https://'.$request->server('HTTP_HOST').'/storage/'.$filePath, CodeService::PUBLIC_SUCCESS);
         }
         $this->returnFail(CodeService::PUBLIC_ERROR);
     }
