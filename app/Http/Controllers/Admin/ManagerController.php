@@ -96,7 +96,7 @@ class ManagerController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $checkResult = $this->managerService->getManagerInfo($userName);
+        $checkResult = $this->managerService->getManagerInfo(['name' => $userName]);
 
         if ($checkResult) {
 
@@ -125,21 +125,21 @@ class ManagerController extends Controller
      * @param int $id
      * @param Request $request
      */
-    public function updateManager(int $id, Request $request)
+    public function updateManager(Request $request)
     {
 
         $userName = $request->input('name');
-        $passWord = $request->input('pass_word');
+        $id       = $request->input('id');
+        $passWord = $request->input('password');
         $status   = $request->input('status');
-
 
         if (empty($userName) || empty($status) || empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $managerInfo = $this->managerService->getManagerInfo($userName);
-        if ($managerInfo && $id !== $managerInfo['id']) {
+        $managerInfo = $this->managerService->getManagerInfo(['name'=>$userName]);
+        if ($managerInfo && $id != $managerInfo['id']) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
         }
