@@ -61,6 +61,7 @@ class SystemService
                     $query->where('sys_name', 'like', '%' . $where['keyword'] . '%');
                 }
             })
+            ->where('is_delete',2)
             ->offset($offset)
             ->limit($pageSize)
             ->get(['id', 'sys_name', 'sys_value', 'sys_explain', 'sys_type', 'create_time', 'update_time', 'status', 'is_delete','status as status_str','is_delete as is_delete_str'])
@@ -113,6 +114,6 @@ class SystemService
     public function delSystem($where)
     {
 
-        return System::query()->where($where)->update(['id_delete' => 1]);
+        return System::query()->where($where)->update(['is_delete' => 1]);
     }
 }

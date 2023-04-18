@@ -96,7 +96,7 @@ class ManagerController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $checkResult = $this->managerService->getManagerInfo($userName);
+        $checkResult = $this->managerService->getManagerInfo(['name'=>$userName]);
 
         if ($checkResult) {
 
