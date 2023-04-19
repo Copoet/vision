@@ -35,12 +35,25 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('system/update/{id}', 'SystemController@updateSystem');
     Route::delete('system/delete/{id}', 'SystemController@delSystem');
 
-
     Route::get('manager/list', 'ManagerController@managerList');
     Route::get('manager/info/{id}', 'ManagerController@managerInfo');
     Route::post('manager/create', 'ManagerController@createManager');
     Route::put('manager/update/{id}', 'ManagerController@updateManager');
     Route::delete('manager/delete/{id}', 'ManagerController@delManager');
+
+    Route::get('menu/list', 'MenuController@menuList');
+    Route::get('menu/info/{id}', 'MenuController@menuInfo');
+    Route::any('menu/tree', 'MenuController@menuTree');
+    Route::post('menu/create', 'MenuController@createMenu');
+    Route::put('menu/update/{id}', 'MenuController@updateMenu');
+    Route::delete('menu/delete/{id}', 'MenuController@delMenu');
+    Route::any('menu/side_menu', 'MenuController@sideMenu');
+
+    Route::get('nav/list', 'NavigationController@navigationList');
+    Route::get('nav/info/{id}', 'NavigationController@navigationInfo');
+    Route::post('nav/create', 'NavigationController@createNavigation');
+    Route::put('nav/update/{id}', 'NavigationController@updateNavigation');
+    Route::delete('nav/delete/{id}', 'NavigationController@delNavigation');
 
     Route::get('auth_role/list', 'AuthRoleController@list');
     Route::post('auth_role/create', 'AuthRoleController@create');
@@ -63,23 +76,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('auth_role_permissions/update/{id}', 'AuthRolePermissionsController@update');
     Route::delete('auth_role_permissions/delete/{id}', 'AuthRolePermissionsController@delete');
 
-
-    Route::get('menu/list', 'MenuController@menuList');
-    Route::get('menu/info/{id}', 'MenuController@menuInfo');
-    Route::any('menu/tree', 'MenuController@menuTree');
-    Route::post('menu/create', 'MenuController@createMenu');
-    Route::put('menu/update/{id}', 'MenuController@updateMenu');
-    Route::delete('menu/delete/{id}', 'MenuController@delMenu');
-    Route::any('menu/side_menu', 'MenuController@sideMenu');
-
-
-
-
-    Route::get('nav/list', 'NavigationController@navigationList');
-    Route::get('nav/info/{id}', 'NavigationController@navigationInfo');
-    Route::post('nav/create', 'NavigationController@createNavigation');
-    Route::put('nav/update/{id}', 'NavigationController@updateNavigation');
-    Route::delete('nav/delete/{id}', 'NavigationController@delNavigation');
 
     Route::get('slide/list', 'SlideShowController@slideList');
     Route::get('slide/info/{id}', 'SlideShowController@slideInfo');

@@ -92,14 +92,16 @@ class ManagerService
 
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = Manager::query()->where(function ($query) use ($where) {
-            if (isset($where['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyword'] . '%');
-            }
-            if (isset($where['is_delete'])) {
-                $query->where('is_delete', $where['is_delete']);
-            }
-        })
+        $result['list'] = Manager::query()
+            ->where(function ($query) use ($where) {
+                if (isset($where['keyword'])) {
+                    $query->where('name', 'like', '%' . $where['keyword'] . '%');
+                }
+                if (isset($where['is_delete'])) {
+                    $query->where('is_delete', $where['is_delete']);
+                }
+            })
+            ->where('is_delete',2)
             ->offset($offset)
             ->limit($pageSize)
             ->get($columns)
