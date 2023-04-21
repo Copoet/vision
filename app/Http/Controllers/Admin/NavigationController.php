@@ -35,9 +35,7 @@ class NavigationController extends Controller
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
-
         $list = $this->navService->getNavigationList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
-
         if ($list) {
             $this->returnSuccess($list, CodeService::PUBLIC_SUCCESS);
 
@@ -128,8 +126,7 @@ class NavigationController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $checkResult = $this->navService->getNavigation(['name' => $name], 'id');
-
+        $checkResult = $this->navService->getNavigation(['name' => $name]);
         if ($checkResult && $id !== $checkResult['id']) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
         }

@@ -27,7 +27,7 @@ class NavigationService
     {
 
         return Navigation::query()->where($where)
-            ->get(['id', 'name', 'url', 'parent_id', 'path', 'create_time', 'update_time', 'status', 'is_delete'])
+            ->first(['id', 'name', 'url', 'parent_id', 'path', 'create_time', 'update_time', 'status', 'is_delete'])
             ->toArray();
 
     }
@@ -59,19 +59,22 @@ class NavigationService
     public function getNavigationList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = Navigation::query(function ($query) use ($where) {
+        $result['total'] = Navigation::query()->where(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
-        })->count();
-
+        })
+            ->where('is_delete',2)
+            ->count();
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = Navigation::query()->where(function ($query) use ($where) {
-            if (isset($param['keyword'])) {
+        $result['list'] = Navigation::query()
+            ->where(function ($query) use ($where) {
+            if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })
+            ->where('is_delete',2)
             ->offset($offset)
             ->limit($pageSize)
             ->get($columns);

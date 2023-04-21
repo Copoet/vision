@@ -22,7 +22,7 @@ class Navigation extends Model
 
     protected $fillable = ['status','name','url','parent_id','path','is_delete'];
 
-    public function getStatusStrAttribute($value)
+    public function getStatusAttribute($value)
     {
 
         return NavigationEnum::STATUS[$value];
