@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Enum\ArticleSortEnum;
 use App\Models\ArticleSort;
 use App\Services\Common\CommonService;
 
@@ -39,19 +40,21 @@ class ArticleSortService
     public function getSortList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = ArticleSort::query(function ($query) use ($where) {
-            if (isset($where['keyword'])) {
-                $query->where('sort_name', 'like', '%' . $where['keyword'] . '%');
-            }
-        })->count();
+        $result['total'] = ArticleSort::query()
+            ->where(function ($query) use ($where) {
+                if (isset($where['keyword'])) {
+                    $query->where('sort_name', 'like', '%' . $where['keyword'] . '%');
+                }
+            })->count();
 
         $offset = ($page - 1) * $pageSize;
 
-        $result['list'] = ArticleSort::query()->where(function ($query) use ($where) {
-            if (isset($param['keyword'])) {
-                $query->where('sort_name', 'like', '%' . $where['keyword'] . '%');
-            }
-        })
+        $result['list'] = ArticleSort::query()
+            ->where(function ($query) use ($where) {
+                if (isset($param['keyword'])) {
+                    $query->where('sort_name', 'like', '%' . $where['keyword'] . '%');
+                }
+            })
             ->offset($offset)
             ->limit($pageSize)
             ->get($columns)
@@ -61,7 +64,7 @@ class ArticleSortService
 
         foreach ($result['list'] as &$val) {
 
-            $val['parent_name'] = $sort[$val['parent_id']]??'顶级分类';
+            $val['parent_name'] = $sort[$val['parent_id']] ?? '顶级分类';
 
         }
 

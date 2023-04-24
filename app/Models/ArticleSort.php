@@ -21,10 +21,10 @@ class ArticleSort extends Model
     const UPDATED_AT = 'update_time';
 
 
-    public function getStatusStrAttribute($value)
+    public function getStatusAttribute($value)
     {
 
-        return ArticleEnum::STATUS[$value];
+        return ArticleEnum::STATUS[$value] ?? '未知';
     }
 
 

@@ -21,7 +21,7 @@ class Menu extends Model
     const UPDATED_AT = 'update_time';
     protected $fillable = ['name'];
 
-    public function getStatusStrAttribute($value)
+    public function getStatusAttribute($value)
     {
 
         return MenuEnum::STATUS[$value];

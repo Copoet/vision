@@ -21,7 +21,7 @@ class Users extends Model
     const UPDATED_AT = 'update_time';
 
 
-    public function getStatusStrAttribute($value)
+    public function getStatusAttribute($value)
     {
 
         return UsersEnum::STATUS[$value];

@@ -55,6 +55,19 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('nav/update/{id}', 'NavigationController@updateNavigation');
     Route::delete('nav/delete/{id}', 'NavigationController@delNavigation');
 
+    Route::get('category/list', 'ArticleSortController@articleSortList');
+    Route::get('category/info/{id}', 'ArticleSortController@articleSortInfo');
+    Route::post('category/create', 'ArticleSortController@createArticleSort');
+    Route::put('category/update/{id}', 'ArticleSortController@updateArticleSort');
+    Route::delete('category/delete/{id}', 'ArticleSortController@delArticleSort');
+    Route::get('category/tree', 'ArticleSortController@getSortTree');
+
+    Route::get('article/list', 'ArticleController@articleList');
+    Route::get('article/info/{id}', 'ArticleController@articleInfo');
+    Route::post('article/create', 'ArticleController@createArticle');
+    Route::put('article/update/{id}', 'ArticleController@updateArticle');
+    Route::delete('article/delete/{id}', 'ArticleController@delArticle');
+
     Route::get('auth_role/list', 'AuthRoleController@list');
     Route::post('auth_role/create', 'AuthRoleController@create');
     Route::put('auth_role/update/{id}', 'AuthRoleController@update');
@@ -95,18 +108,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('stock/update/{id}', 'StockController@updateUser');
     Route::delete('stock/delete/{id}', 'StockController@delUser');
 
-    Route::get('article/list', 'ArticleController@articleList');
-    Route::get('article/info/{id}', 'ArticleController@articleInfo');
-    Route::post('article/create', 'ArticleController@createArticle');
-    Route::put('article/update/{id}', 'ArticleController@updateArticle');
-    Route::delete('article/delete/{id}', 'ArticleController@delArticle');
 
-    Route::get('article/sort/list', 'ArticleSortController@articleSortList');
-    Route::get('article/sort/info/{id}', 'ArticleSortController@articleSortInfo');
-    Route::post('article/sort/create', 'ArticleSortController@createArticleSort');
-    Route::put('article/sort//update/{id}', 'ArticleSortController@updateArticleSort');
-    Route::delete('article/sort/delete/{id}', 'ArticleSortController@delArticleSort');
-    Route::get('article/sort/tree', 'ArticleSortController@getSortTree');
 
     Route::get('email/list', 'EmailController@emailList');
     Route::get('email/info/{id}', 'EmailController@emailInfo');
