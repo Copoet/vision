@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuthRole extends Model {
 
-    protected $table = 'auth_rule';
+    protected $table = 'auth_role';
 
 
     protected $primaryKey = 'id';
@@ -19,8 +19,9 @@ class AuthRole extends Model {
 
     const UPDATED_AT = 'update_time';
 
+    protected $fillable = ['name'];
 
-    public function getStatusStrAttribute($value)
+    public function getStatusAttribute($value)
     {
         return AuthRoleEnum::STATUS[$value];
     }

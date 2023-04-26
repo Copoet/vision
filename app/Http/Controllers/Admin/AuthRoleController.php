@@ -32,7 +32,7 @@ class AuthRoleController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
 
-        $list = $this->authRoleService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authRoleService->getList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
 
         if ($list) {
             $this->returnSuccess($list);
@@ -50,21 +50,16 @@ class AuthRoleController extends Controller
     public function create(Request $request)
     {
 
-        $menuId = $request->input('menu_id');
-        $action = $request->input('action');
-        $name   = $request->input('name');
-        $status = $request->input('status');
+        $name         = $request->input('name');
+        $status       = $request->input('status');
 
-        if (empty($name) || empty($menuId) || empty($action)) {
+        if (empty($name) || empty($status)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['menu_id'] = $menuId;
-        $data['name']    = $name;
-        $data['status']  = $status;
-        $data['action']  = $action;
-
+        $data['name']          = $name;
+        $data['status']        = $status;
         $result = $this->authRoleService->store($data);
 
         if ($result) {
@@ -83,23 +78,17 @@ class AuthRoleController extends Controller
      */
     public function update(Request $request)
     {
-        $menuId   = $request->input('menu_id');
-        $action   = $request->input('action');
+
         $name     = $request->input('name');
         $status   = $request->input('status');
         $id       = $request->input('id');
-        $isDelete = $request->input('is_delete');
-
-        if (empty($name) || empty($menuId) || empty($action) || empty($id)) {
+        if (empty($name)  || empty($id)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-        $data['menu_id']   = $menuId;
         $data['name']      = $name;
         $data['status']    = $status;
-        $data['action']    = $action;
-        $data['is_delete'] = $isDelete;
 
         $result = $this->authRoleService->update(['id' => $id], $data);
 

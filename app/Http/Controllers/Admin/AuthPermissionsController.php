@@ -29,8 +29,7 @@ class AuthPermissionsController extends Controller
         $page     = $request->input('page') ? $request->input('page') : 1;
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 20;
         $param    = $request->all();
-
-        $list = $this->authPermissionsService->getList($param,['*','status as status_str','is_delete as is_delete_str'], $page, $pageSize);
+        $list = $this->authPermissionsService->getList($param, ['*', 'status as status_str', 'is_delete as is_delete_str'], $page, $pageSize);
         if ($list) {
             $this->returnSuccess($list);
         } else {
@@ -46,21 +45,20 @@ class AuthPermissionsController extends Controller
      */
     public function create(Request $request)
     {
-        $id      = $request->input('id');
-        $uid     = $request->input('uid');
-        $groupId = $request->input('group_id');
+        $name   = $request->input('name');
+        $menuId = $request->input('menu_id');
+        $action = $request->input('action');
 
-        if (empty($name) || empty($groupId)) {
+        if (empty($name) || empty($menuId) || empty($action)) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
 
-        $data['id']       = $id;
-        $data['uid']      = $uid;
-        $data['group_id'] = $groupId;
-
-        $result = $this->authPermissionsService->store($data);
+        $data['name']    = $name;
+        $data['menu_id'] = $menuId;
+        $data['action']  = $action;
+        $result          = $this->authPermissionsService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -77,23 +75,23 @@ class AuthPermissionsController extends Controller
      * @param int $id
      * @param Request $request
      */
-    public function update(int $id,Request $request)
+    public function update(int $id, Request $request)
     {
 
-        $uid     = $request->input('uid');
-        $groupId = $request->input('group_id');
-
-        if (empty($name) || empty($groupId)) {
-
+        $name   = $request->input('name');
+        $menuId = $request->input('menu_id');
+        $action = $request->input('action');
+        $status = $request->input('status');
+        if (empty($name) || empty($menuId) || empty($action)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
+        $data['name']    = $name;
+        $data['menu_id'] = $menuId;
+        $data['action']  = $action;
+        $data['status']  = $status;
 
-        $data['id']       = $id;
-        $data['uid']      = $uid;
-        $data['group_id'] = $groupId;
-
-        $result = $this->authPermissionsService->update($data);
+        $result = $this->authPermissionsService->update(['id' => $id], $data);
 
         if ($result) {
             $this->returnSuccess($result);

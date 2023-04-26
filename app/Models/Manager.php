@@ -13,7 +13,7 @@ class Manager extends Authenticatable implements JWTSubject
 {
     //
 
-    protected $table = 'manager';
+    protected $table = 'auth_manager';
 
 
     protected $primaryKey = 'id';

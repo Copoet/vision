@@ -33,14 +33,11 @@ class AuthPermissionsService
      * @param $page
      * @param $pageSize
      * @return mixed
-     * @author copoet
-     * @mail copoet@126.com
-     * Date: 2020/8/22/5:28 PM
      */
     public function getList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = AuthPermissions::query(function ($query) use ($where) {
+        $result['total'] = AuthPermissions::query()->where(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -49,8 +46,8 @@ class AuthPermissionsService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = AuthPermissions::query()->where(function ($query) use ($where) {
-            if (isset($param['keyword'])) {
-                $query->where('name', 'like', '%' . $where['keyWords'] . '%');
+            if (isset($where['keyword'])) {
+                $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })
             ->offset($offset)

@@ -68,10 +68,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('article/update/{id}', 'ArticleController@updateArticle');
     Route::delete('article/delete/{id}', 'ArticleController@delArticle');
 
-    Route::get('auth_role/list', 'AuthRoleController@list');
-    Route::post('auth_role/create', 'AuthRoleController@create');
-    Route::put('auth_role/update/{id}', 'AuthRoleController@update');
-    Route::delete('auth_role/delete/{id}', 'AuthRoleController@delete');
+    Route::get('role/list', 'AuthRoleController@list');
+    Route::post('role/create', 'AuthRoleController@create');
+    Route::put('role/update/{id}', 'AuthRoleController@update');
+    Route::delete('role/delete/{id}', 'AuthRoleController@delete');
 
     Route::get('auth_manager_role/list', 'AuthManagerRoleController@list');
     Route::post('auth_manager_role/create', 'AuthManagerRoleController@create');
@@ -79,10 +79,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::delete('auth_manager_role/delete/{id}', 'AuthManagerRoleController@delete');
 
 
-    Route::get('auth_permissions/list', 'AuthPermissionsController@list');
-    Route::post('auth_permissions/create', 'AuthPermissionsController@create');
-    Route::put('auth_permissions/update/{id}', 'AuthPermissionsController@update');
-    Route::delete('auth_permissions/delete/{id}', 'AuthPermissionsController@delete');
+    Route::get('permission/list', 'AuthPermissionsController@list');
+    Route::post('permission/create', 'AuthPermissionsController@create');
+    Route::put('permission/update/{id}', 'AuthPermissionsController@update');
+    Route::delete('permission/delete/{id}', 'AuthPermissionsController@delete');
 
     Route::get('auth_role_permissions/list', 'AuthRolePermissionsController@list');
     Route::post('auth_role_permissions/create', 'AuthRolePermissionsController@create');

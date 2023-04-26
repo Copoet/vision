@@ -39,7 +39,7 @@ class AuthRoleService
     public function getList($where, $columns = ['*'], $page, $pageSize)
     {
 
-        $result['total'] = AuthRole::query(function ($query) use ($where) {
+        $result['total'] = AuthRole::query()->where(function ($query) use ($where) {
             if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
@@ -48,7 +48,7 @@ class AuthRoleService
         $offset = ($page - 1) * $pageSize;
 
         $result['list'] = AuthRole::query()->where(function ($query) use ($where) {
-            if (isset($param['keyword'])) {
+            if (isset($where['keyword'])) {
                 $query->where('name', 'like', '%' . $where['keyword'] . '%');
             }
         })

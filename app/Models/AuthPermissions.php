@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuthPermissions extends Model
 {
-    protected $table = 'auth_group_access';
+    protected $table = 'auth_permission';
 
 
     protected $primaryKey = 'id';
@@ -19,8 +19,9 @@ class AuthPermissions extends Model
 
     const UPDATED_AT = 'update_time';
 
+    protected $fillable = ['name','menu_id','action'];
 
-    public function getStatusStrAttribute($value)
+    public function getStatusAttribute($value)
     {
         return AuthPermissionsEnum::STATUS[$value];
     }
