@@ -19,7 +19,7 @@ class Menu extends Model
     const CREATED_AT = 'create_time';
 
     const UPDATED_AT = 'update_time';
-    protected $fillable = ['name'];
+    protected $fillable = ['parent_id','name','url','status','icon'];
 
     public function getStatusAttribute($value)
     {

@@ -111,7 +111,7 @@ class MenuController extends Controller
     public function createMenu(Request $request)
     {
         $name     = $request->input('name');
-        $parentId = $request->input('parent_id');
+        $parentId = $request->input('parentId');
         $url      = $request->input('url');
         $status   = $request->input('status');
         $icon     = $request->input('icon');
@@ -132,7 +132,6 @@ class MenuController extends Controller
         $data['url']       = $url;
         $data['status']    = $status;
         $data['icon']      = $icon;
-
         $result = $this->menuService->store($data);
 
         if ($result) {
