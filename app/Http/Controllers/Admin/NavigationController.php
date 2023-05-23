@@ -75,7 +75,7 @@ class NavigationController extends Controller
     {
 
         $name     = $request->input('name');
-        $parentId = $request->input('parent_id');
+        $parentId = $request->input('parentId');
         $url      = $request->input('url');
         $status   = $request->input('status');
         $path     = $request->input('path');
@@ -116,7 +116,7 @@ class NavigationController extends Controller
     public function updateNavigation(int $id, Request $request)
     {
         $name     = $request->input('name');
-        $parentId = $request->input('parent_id');
+        $parentId = $request->input('parentId');
         $url      = $request->input('url');
         $status   = $request->input('status');
         $path     = $request->input('path');

@@ -129,7 +129,8 @@ class ArticleSortService
             ->get(['id', 'sort_name as label', 'parent_id'])
             ->toArray();
         $result = CommonService::getTree($result, 0);
-
+        $queue = array('id' => 0, 'label' => '顶级分类', 'parent_id' => 0);
+        array_unshift($result, $queue);
         return array_merge($result);
     }
 

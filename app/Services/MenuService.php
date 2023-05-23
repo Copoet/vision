@@ -68,7 +68,7 @@ class MenuService
         $menu = array_column($result['list'], 'name', 'id');
 
         foreach ($result['list'] as $key => $val) {
-            $result['list'][$key]['parent_title'] = $menu[$val['parent_id']] ?? '顶级菜单';
+            $result['list'][$key]['parent_title'] = $menu[$val['parentId']] ?? '顶级菜单';
 
         }
 
@@ -151,6 +151,6 @@ class MenuService
      */
     public function getMenuInfo($where, $columns = ['*'])
     {
-        return Menu::query()->where($where)->get($columns)->toArray();
+        return Menu::query()->where($where)->get($columns)->first()->toArray();
     }
 }

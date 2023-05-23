@@ -42,7 +42,10 @@ class MenuController extends Controller
         $pageSize = $request->input('page_size') ? $request->input('page_size') : 50;
         $param    = $request->all();
 
-        $list = $this->menuService->getMenuList($param, ['*','status as status_str','is_delete as is_delete_str'],$page, $pageSize);
+        $list = $this->menuService->getMenuList($param,
+            ['id', 'name','parent_id as parentId','url', 'status','status as status_str', 'is_delete as is_delete_str']
+            , $page, $pageSize
+        );
 
         if ($list) {
 
@@ -58,7 +61,8 @@ class MenuController extends Controller
      * @param int $id
      * 获取菜单信息
      */
-    public function menuInfo(int $id){
+    public function menuInfo(int $id)
+    {
 
         if (empty($id)) {
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
@@ -132,7 +136,7 @@ class MenuController extends Controller
         $data['url']       = $url;
         $data['status']    = $status;
         $data['icon']      = $icon;
-        $result = $this->menuService->store($data);
+        $result            = $this->menuService->store($data);
 
         if ($result) {
             $this->returnSuccess($result);
@@ -152,10 +156,10 @@ class MenuController extends Controller
      * Date: 2020/8/26/10:43 AM
      *
      */
-    public function updateMenu(int $id,Request $request)
+    public function updateMenu(int $id, Request $request)
     {
         $name     = $request->input('name');
-        $parentId = $request->input('parent_id');
+        $parentId = $request->input('parentId');
         $url      = $request->input('url');
         $status   = $request->input('status');
         $icon     = $request->input('icon');
@@ -165,9 +169,7 @@ class MenuController extends Controller
             $this->returnFail(CodeService::PUBLIC_PARAMS_NULL);
         }
 
-
         $checkResult = $this->menuService->getMenuInfo(['name' => $name], ['id', 'name']);
-
         if ($checkResult && $id !== $checkResult['id']) {
 
             $this->returnFail(CodeService::PUBLIC_PARAMS_ALREADY_EXIST);
@@ -217,16 +219,17 @@ class MenuController extends Controller
      * @mail copoet@126.com
      * Date: 2020/9/2/10:19 AM
      */
-    public function sideMenu(){
+    public function sideMenu()
+    {
 
         $list = $this->menuService->getSideMenu();
 
         $result = CommonService::getTree($list, 0);
 
-        if($result){
+        if ($result) {
 
             $this->returnSuccess($result);
-        }else{
+        } else {
             $this->returnFail(CodeService::PUBLIC_ERROR);
         }
 
