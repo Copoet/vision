@@ -127,5 +127,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'ValidateToken'], function
     Route::put('email_template/update/{id}', 'EmailTemplateController@updateTemplate');
     Route::delete('email_template/delete/{id}', 'EmailTemplateController@delTemplate');
 
+    //图片上传
+    Route::post('image/upload', 'UploadController@uploadImage');
 
 });
